@@ -1,0 +1,6 @@
+@practicum2425.Server_HostAddress = http://localhost:5021
+
+GET {{practicum2425.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
