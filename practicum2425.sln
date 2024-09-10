@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "practicum2425.Server", "practicum2425.Server\practicum2425.Server.csproj", "{C5ACE206-F2A2-4834-B836-64DD3E3D68DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "practicum2425.Server", "practicum2425.Server\practicum2425.Server.csproj", "{C5ACE206-F2A2-4834-B836-64DD3E3D68DD}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "practicum2425.client", "practicum2425.client\practicum2425.client.esproj", "{3A6D9195-ED79-4A6D-86C1-B622FD0C3416}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "practicum2425.Tests", "practicum2425.Tests\practicum2425.Tests.csproj", "{B80D5E73-F450-4A1F-9169-92D6A7737630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{3A6D9195-ED79-4A6D-86C1-B622FD0C3416}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A6D9195-ED79-4A6D-86C1-B622FD0C3416}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A6D9195-ED79-4A6D-86C1-B622FD0C3416}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B80D5E73-F450-4A1F-9169-92D6A7737630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B80D5E73-F450-4A1F-9169-92D6A7737630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B80D5E73-F450-4A1F-9169-92D6A7737630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B80D5E73-F450-4A1F-9169-92D6A7737630}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
