@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace practicum2425.Server.Data;
 
-public partial class DbBrycecoon25Context : DbContext
+public partial class PostgresContext : DbContext
 {
-    public DbBrycecoon25Context()
+    public PostgresContext()
     {
     }
 
-    public DbBrycecoon25Context(DbContextOptions<DbBrycecoon25Context> options)
+    public PostgresContext(DbContextOptions<PostgresContext> options)
         : base(options)
     {
     }
