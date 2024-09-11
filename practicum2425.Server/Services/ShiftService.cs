@@ -5,7 +5,7 @@ namespace practicum2425.Server.Services;
 
 public interface IShiftService
 {
-    public Task<Shift?> CancelShiftAsync(int shift_id);
+    public Task CancelShiftAsync(int shift_id);
 }
 
 
@@ -17,7 +17,7 @@ public class ShiftService : IShiftService
         _context = context;
     }
 
-    public async Task<Shift?> CancelShiftAsync(int shift_id)
+    public async Task CancelShiftAsync(int shift_id)
     {
         Shift? shift = await _context.Shifts
             .Where(s => s.Id == shift_id)
@@ -28,7 +28,5 @@ public class ShiftService : IShiftService
             shift.Status = Shift.STATUS_ARCHIVED;
             _context.Shifts.Update(shift);
         }
-
-        return shift;
     }
 }
