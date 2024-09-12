@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Shift } from '../DataInterface/ShiftInterface'
 
 function ViewShift() {
-    interface Shift {
-        id: number
-        name: string
-    }
-
     const[shifts, setShifts] = useState<Shift[]>() 
 
     useEffect(() => {
@@ -13,22 +9,26 @@ function ViewShift() {
     },[])
 
     async function populateShifts() {
-        const response = await fetch('/api/Company/GetCompanies');
+        const response = await fetch('/api/Shift/GetShifts');
         const data = await response.json();
         setShifts(data);
     }
 
-    const contents = shifts === undefined ? <p>Loading</p> :
+    const contents =
+      shifts === undefined ? (
+        <p>Loading</p>
+      ) : (
         <div>
-            {companies.map(s =>
-                <p key={s.id}> {s.name}</p>
-            )}
+          {shifts.map((s) => (
+              <p key={s.id}> {s.location} : {s.startTime} - {s.endTime}</p>
+          ))}
         </div>
+      );
     
     return (
         <div >
             <h1 id="shifts"> Shift List</h1>
-            <p> {shifts} </p>
+            {contents}
             
         </div>
     

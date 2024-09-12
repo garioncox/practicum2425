@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using practicum2425.Server.Data;
+using practicum2425.Server.Interfaces;
 using practicum2425.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PostgresContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("db")));
 builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IShiftService, ShiftService>();
+
 
 var app = builder.Build();
 
