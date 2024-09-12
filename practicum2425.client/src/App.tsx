@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import ViewShift from './ViewShift';
 
 interface Company {
     id: number;
@@ -28,6 +29,8 @@ function App() {
             {contents}
         </div>
     );
+
+    <ViewShift />
 
     async function populateCompanyData() {
         const response = await fetch('/api/Company/GetCompanies');
