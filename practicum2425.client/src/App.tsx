@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import ViewShift from './ViewShift';
-import React from 'react';
+import React from 'react' ;
 
 
 interface Company {
