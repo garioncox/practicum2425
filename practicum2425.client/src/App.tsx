@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import ViewShift from './ViewShift';
+import ShiftForm from '../Components/ShiftForm'
 
 interface Company {
     id: number;
@@ -24,11 +25,12 @@ function App() {
 
     return (
         <>
-            <div className="bg-dark">
+            <div>
                 <h1 id="tableLabel">Company List</h1>
                 <p>This component demonstrates fetching data from the server.</p>
                 {contents}
             </div>
+            <ShiftForm />
             <ViewShift />
         </>
     );

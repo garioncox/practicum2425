@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="DataInterface\" />
+    <Folder Include="Components\" />
   </ItemGroup>
 </Project>
