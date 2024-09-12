@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import ViewShift from './ViewShift';
-import React from 'react' ;
-
 
 interface Company {
     id: number;
@@ -27,11 +25,11 @@ function App() {
     return (
         <>
             <div className="bg-dark">
-            <h1 id="tableLabel">Company List</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
-        <ViewShift />   
+                <h1 id="tableLabel">Company List</h1>
+                <p>This component demonstrates fetching data from the server.</p>
+                {contents}
+            </div>
+            <ViewShift />
         </>
     );
 
