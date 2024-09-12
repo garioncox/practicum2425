@@ -1,13 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using practicum2425.Server.Data;
+using practicum2425.Server.Interfaces;
 
 namespace practicum2425.Server.Services;
-
-public interface IShiftService
-{
-    public Task CancelShiftAsync(int shift_id);
-}
-
 
 public class ShiftService : IShiftService
 {
@@ -28,5 +23,10 @@ public class ShiftService : IShiftService
             shift.Status = Shift.STATUS_ARCHIVED;
             _context.Shifts.Update(shift);
         }
+    }
+    
+    public async Task<List<Shift>> GetAllShifts()
+    {
+        return await _context.Shifts.ToListAsync();
     }
 }
