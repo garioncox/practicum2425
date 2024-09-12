@@ -24,12 +24,12 @@ function App() {
 
     return (
         <>
-        <div>
-            <h1 id="tableLabel">Company List</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
-        <ViewShift />   
+            <div className="bg-dark">
+                <h1 id="tableLabel">Company List</h1>
+                <p>This component demonstrates fetching data from the server.</p>
+                {contents}
+            </div>
+            <ViewShift />
         </>
     );
 
