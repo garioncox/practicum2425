@@ -33,7 +33,6 @@ const ViewShift: FC<{
             {contents}
             
         </div>
-    
     )
 }
 

@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import ViewShift from './ViewShift';
 
+import ProjectForm from '../Components/ProjectForm';
+import ViewProject from '../Components/ViewProject'
 import { Shift } from '../DataInterface/ShiftInterface';
+
 
 
 interface Company {
@@ -39,8 +42,9 @@ function App() {
                 setShifts={setShifts}
             />
 
-            <ShiftForm />
-            
+            <ProjectForm />
+            <ViewProject />
+
         </>
     );
 
