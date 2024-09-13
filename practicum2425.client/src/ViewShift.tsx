@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, FC } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
 
-function ViewShift() {
-    const[shifts, setShifts] = useState<Shift[]>() 
-
+const ViewShift: FC<{
+    setShifts: (s: Shift[]) => void;
+    shifts: Shift[] | undefined
+}> = ({ shifts, setShifts }) => {
+    
     useEffect(() => {
         populateShifts();
     },[])
