@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import ViewShift from './ViewShift';
-import ShiftForm from '../Components/ProjectForm';
+
+import ProjectForm from '../Components/ProjectForm';
 import ViewProject from '../Components/ViewProject'
+import { Shift } from '../DataInterface/ShiftInterface';
+
 
 
 interface Company {
@@ -11,6 +14,7 @@ interface Company {
 }
 
 function App() {
+    const [shifts, setShifts] = useState<Shift[]>() 
     const [companies, setCompanies] = useState<Company[]>();
 
     useEffect(() => {
@@ -32,9 +36,16 @@ function App() {
                 <p>This component demonstrates fetching data from the server.</p>
                 {contents}
             </div>
+
+            <ViewShift
+                shifts={shifts}
+                setShifts={setShifts}
+            />
+
             <ShiftForm />
             <ViewShift />
             <ViewProject />
+
         </>
     );
 
