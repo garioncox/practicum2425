@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Shift } from "../DataInterface/ShiftInterface";
 
 function Shiftform() {
-  const [shifts, setShifts] = useState<Shift[]>();
+  const [shift, setShift] = useState<Shift>();
 
   return (
     <form>

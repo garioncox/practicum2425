@@ -5,16 +5,17 @@ using practicum2425.Server.Interfaces;
 namespace practicum2425.Server.Services;
 
 
-public class CompanyService : ICompanyService
+public class ProjectService : IProjectService
 {
     readonly PostgresContext _context;
-    public CompanyService(PostgresContext context)
+    public ProjectService(PostgresContext context)
     {
         _context = context;
     }
 
-    public async Task<List<Company>> GetCompanyListAsync()
+    public async Task<List<Project>> GetProjectListAsync()
     {
-        return await _context.Companies.ToListAsync();
+        return await _context.Projects.ToListAsync();
     }
 }
+

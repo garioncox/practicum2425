@@ -31,7 +31,6 @@ function ViewShift() {
             {contents}
             
         </div>
-    
     )
 }
 

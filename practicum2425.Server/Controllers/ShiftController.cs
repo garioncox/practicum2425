@@ -7,15 +7,15 @@ using practicum2425.Server.Services;
 [Route("api/[controller]")]
 public class ShiftController : ControllerBase
 {
-    private readonly IShiftService _companyService;
+    private readonly IShiftService _shiftService;
     public ShiftController(IShiftService service)
     {
-        _companyService = service;
+        _shiftService = service;
     }
 
     [HttpGet("GetShifts")]
     public async Task<List<Shift>> GetShiftsListAsync()
     {
-        return await _companyService.GetAllShifts();
+        return await _shiftService.GetAllShifts();
     }
 }

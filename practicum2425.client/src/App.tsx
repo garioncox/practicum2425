@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import ViewShift from './ViewShift';
-import ShiftForm from '../Components/ShiftForm'
+import ShiftForm from '../Components/ProjectForm';
+import ViewProject from '../Components/ViewProject'
+
 
 interface Company {
     id: number;
@@ -32,6 +34,7 @@ function App() {
             </div>
             <ShiftForm />
             <ViewShift />
+            <ViewProject />
         </>
     );
 
