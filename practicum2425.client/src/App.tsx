@@ -42,8 +42,7 @@ function App() {
                 setShifts={setShifts}
             />
 
-            <ShiftForm />
-            <ViewShift />
+            <ProjectForm />
             <ViewProject />
 
         </>
