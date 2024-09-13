@@ -1,9 +1,5 @@
-import { useState } from "react";
-import { Shift } from "../DataInterface/ShiftInterface";
 
-function Shiftform() {
-  const [shift, setShift] = useState<Shift>();
-
+function ProjectForm() {
   return (
     <form>
       <h1>Create a New Project</h1>
@@ -67,4 +63,4 @@ function Shiftform() {
   );
 }
 
-export default Shiftform;
+export default ProjectForm;
