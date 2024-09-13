@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import ViewShift from './ViewShift';
+import { Shift } from '../DataInterface/ShiftInterface';
 
 interface Company {
     id: number;
@@ -8,6 +9,7 @@ interface Company {
 }
 
 function App() {
+    const [shifts, setShifts] = useState<Shift[]>() 
     const [companies, setCompanies] = useState<Company[]>();
 
     useEffect(() => {
@@ -29,7 +31,10 @@ function App() {
                 <p>This component demonstrates fetching data from the server.</p>
                 {contents}
             </div>
-            <ViewShift />
+            <ViewShift
+                shifts={shifts}
+                setShifts={setShifts}
+            />
         </>
     );
 
