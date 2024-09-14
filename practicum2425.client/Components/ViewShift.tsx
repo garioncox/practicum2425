@@ -1,5 +1,6 @@
 import { useEffect, FC } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
+import Spinner from './Spinner';
 
 const ViewShift: FC<{
     setShifts: (s: Shift[]) => void;
@@ -17,9 +18,7 @@ const ViewShift: FC<{
     }
 
     const contents =
-      shifts === undefined ? (
-        <p>Loading</p>
-      ) : (
+      shifts === undefined ? <Spinner /> : (
         <div>
           {shifts.map((s) => (
               <p key={s.id}> {s.location} : {s.startTime} - {s.endTime}</p>
