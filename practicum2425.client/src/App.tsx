@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 import ViewShift from '../Components/ViewShift';
 import ViewCompany from '../Components/ViewCompany'
 import ProjectForm from '../Components/ProjectForm';
