@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Project } from '../DataInterface/ProjectInterface';
+import Spinner from './Spinner';
 
 function ViewProject() {
     const [projects, setProjects] = useState<Project[]>()
@@ -14,7 +15,7 @@ function ViewProject() {
         setProjects(data);
     }
     
-    const contents = projects === undefined ? <p>Loading... Please refresh once the ASP.NET backend has started.</p> : (
+    const contents = projects === undefined ? <Spinner /> : (
       <div>
           {projects.map(c =>
               <p key={c.id}>{c.id}: {c.name}, {c.location}</p>

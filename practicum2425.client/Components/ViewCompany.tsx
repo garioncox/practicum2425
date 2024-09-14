@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Company } from '../DataInterface/CompanyInterface';
-import React from 'react';
+import Spinner from './Spinner'
 
 function ViewProject() {
     const [companies, setCompanies] = useState<Company[]>();
@@ -15,7 +15,7 @@ function ViewProject() {
         setCompanies(data);
     }
 
-    const contents = companies === undefined ? (<p>Loading... Please refresh once the ASP.NET backend has started.</p>) :
+    const contents = companies === undefined ? <Spinner /> :
         (
             <div>
                 {companies.map(c =>

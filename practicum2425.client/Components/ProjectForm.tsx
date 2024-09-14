@@ -10,8 +10,7 @@ function ProjectForm() {
             type="text"
             className="form-control"
             id="title"
-            placeholder="Highway-84"
-            value="I-15, Mile Marker: 223, Expansion"
+            placeholder="I-15, Mile Marker: 223, Expansion"
             required
           />
         </div>
@@ -21,8 +20,7 @@ function ProjectForm() {
             type="text"
             className="form-control"
             id="validationDefault02"
-            placeholder="Last name"
-            value="09-18-2024"
+            placeholder="09-18-2024"
             required
           />
         </div>
