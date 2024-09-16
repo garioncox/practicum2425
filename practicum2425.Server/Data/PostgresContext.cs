@@ -34,13 +34,13 @@ public partial class PostgresContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasPostgresEnum("Practicum2025", "status", new[] { "ACTIVE", "ARCHIVED", "COMPLETED" });
+        modelBuilder.HasPostgresEnum("practicum2425", "status", new[] { "ACTIVE", "ARCHIVED", "COMPLETED" });
 
         modelBuilder.Entity<Company>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("company_pkey");
 
-            entity.ToTable("company", "Practicum2025");
+            entity.ToTable("company", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -52,7 +52,7 @@ public partial class PostgresContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("company_project_pkey");
 
-            entity.ToTable("company_project", "Practicum2025");
+            entity.ToTable("company_project", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CompanyId).HasColumnName("company_id");
@@ -71,7 +71,7 @@ public partial class PostgresContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("employee_pkey");
 
-            entity.ToTable("employee", "Practicum2025");
+            entity.ToTable("employee", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -84,7 +84,7 @@ public partial class PostgresContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("employee_shift_pkey");
 
-            entity.ToTable("employee_shift", "Practicum2025");
+            entity.ToTable("employee_shift", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.EmpId).HasColumnName("emp_id");
@@ -109,7 +109,7 @@ public partial class PostgresContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("project_pkey");
 
-            entity.ToTable("project", "Practicum2025");
+            entity.ToTable("project", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.EndDate)
@@ -133,7 +133,7 @@ public partial class PostgresContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("project_shift_pkey");
 
-            entity.ToTable("project_shift", "Practicum2025");
+            entity.ToTable("project_shift", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.ProjectId).HasColumnName("project_id");
@@ -152,7 +152,7 @@ public partial class PostgresContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("shift_pkey");
 
-            entity.ToTable("shift", "Practicum2025");
+            entity.ToTable("shift", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Description)

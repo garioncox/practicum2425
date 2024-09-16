@@ -26,5 +26,4 @@ public partial class Shift
     public static string STATUS_ACTIVE = "ACTIVE";
     public static string STATUS_ARCHIVED = "ARCHIVED";
     public static string STATUS_COMPLETED = "COMPLETED";
-
 }
