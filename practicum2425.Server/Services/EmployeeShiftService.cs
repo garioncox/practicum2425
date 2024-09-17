@@ -14,6 +14,7 @@ public class EmployeeShiftService : IEmployeeShiftService
 
     public async Task CreateEmployeeShift(EmployeeShift empShift)
     {
-        await _context.AddAsync(empShift);
+        _context.EmployeeShifts.Add(empShift);
+        await _context.SaveChangesAsync();
     }
 }

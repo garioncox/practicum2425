@@ -1,4 +1,4 @@
 export interface EmployeeShift{
-    EmpId: number
-    ShiftId: number
+    empId: number
+    shiftId: number
 }
