@@ -1,7 +1,7 @@
 import { useEffect, FC } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
 import Spinner from './Spinner'
-import { EmployeeShift } from '../DataInterface/EmployeeShiftInterface'
+import { EmployeeShiftDTO } from '../DataDTOInterfaces/EmployeeShiftDTOInterface'
 
 const ViewShift: FC<{
     setShifts: (s: Shift[]) => void;
@@ -19,9 +19,9 @@ const ViewShift: FC<{
     }
 
     async function postEmployeeShift(id:number) {
-        const employee: EmployeeShift = {
-            empId : 1,
-            shiftId: id
+        const employee: EmployeeShiftDTO = {
+            EmployeeId : 1,
+            ShiftId: id
         }
 
         try {
