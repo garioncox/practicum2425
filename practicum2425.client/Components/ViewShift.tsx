@@ -2,6 +2,7 @@ import { useEffect, FC } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
 import Spinner from './Spinner'
 import { EmployeeShift } from '../DataInterface/EmployeeShiftInterface'
+import { Post } from "../Functions/Post"
 
 const ViewShift: FC<{
     setShifts: (s: Shift[]) => void;
@@ -24,21 +25,7 @@ const ViewShift: FC<{
             shiftId: id
         }
 
-        try {
-            const myHeaders = new Headers();
-            myHeaders.append("accept", "application/json");
-            myHeaders.append("content-type", "application/json");
-
-            await fetch('https://localhost:7157/api/EmployeeShift/', {
-                method: "POST",
-                body: JSON.stringify(employee),
-                headers: myHeaders,
-            })
-        }
-        catch (e) {
-            console.log(e)
-
-        }
+        Post('https://localhost:7157/api/EmployeeShift/', employee)
 
     }
 
