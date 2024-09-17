@@ -12,7 +12,7 @@ public class EmployeeShiftController : ControllerBase
     }
 
     [HttpPost()]
-    public async Task CreateEmpShift(EmployeeShift empShift)
+    public async Task CreateEmpShift( [FromBody] EmployeeShift empShift)
     {
         await _companyService.CreateEmployeeShift(empShift);
     }

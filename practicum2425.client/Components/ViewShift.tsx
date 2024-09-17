@@ -1,6 +1,7 @@
 import { useEffect, FC } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
-import Spinner from './Spinner';
+import Spinner from './Spinner'
+import { EmployeeShift } from '../DataInterface/EmployeeShiftInterface'
 
 const ViewShift: FC<{
     setShifts: (s: Shift[]) => void;
@@ -17,11 +18,38 @@ const ViewShift: FC<{
         setShifts(data);
     }
 
+    async function postEmployeeShift(id:number) {
+        const employee: EmployeeShift = {
+            empId : 1,
+            shiftId: id
+        }
+
+        try {
+            const myHeaders = new Headers();
+            myHeaders.append("accept", "application/json");
+            myHeaders.append("content-type", "application/json");
+
+            await fetch('https://localhost:7157/api/EmployeeShift/', {
+                method: "POST",
+                body: JSON.stringify(employee),
+                headers: myHeaders,
+            })
+        }
+        catch (e) {
+            console.log(e)
+
+        }
+
+    }
+
     const contents =
       shifts === undefined ? <Spinner /> : (
         <div>
-          {shifts.map((s) => (
+                    {shifts.map((s) => (
+              <>
               <p key={s.id}> {s.location} : {s.startTime} - {s.endTime}</p>
+              <button onClick={()=> postEmployeeShift(s.id) }>Take This Shift</button>
+              </>
           ))}
         </div>
       );
