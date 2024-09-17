@@ -17,7 +17,7 @@ function ProjectForm() {
         <div className="col-md-2 mb-3">
           <label htmlFor="validationDefault02">Start Date</label>
           <input
-            type="text"
+            type="date"
             className="form-control"
             id="validationDefault02"
             placeholder="09-18-2024"
@@ -28,7 +28,7 @@ function ProjectForm() {
           <label htmlFor="validationDefaultUsername">End Date</label>
           <div className="input-group">
             <input
-              type="text"
+              type="date"
               className="form-control"
               id="validationDefaultUsername"
               placeholder="11-18-2024"
