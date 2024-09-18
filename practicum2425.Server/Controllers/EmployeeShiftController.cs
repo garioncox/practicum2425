@@ -1,26 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using practicum2425.Server.Data;
 using practicum2425.Server.DTOs;
-using practicum2425.Server.Services;
+using practicum2425.Server.Interfaces;
+
+namespace practicum2425.Server.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EmployeeShiftController : ControllerBase
+public class EmployeeShiftController(IEmployeeShiftService service, IShiftService shiftService) : ControllerBase
 {
-    private readonly IEmployeeShiftService _companyService;
-    public EmployeeShiftController(IEmployeeShiftService service)
-    {
-        _companyService = service;
-    }
+    private readonly IEmployeeShiftService _empShiftService = service;
+    private readonly IShiftService _shiftService = shiftService;
 
     [HttpPost()]
-    public async Task CreateEmpShift( [FromBody] EmployeeShiftDTO empShiftDTO)
+    public async Task CreateEmpShift([FromBody] EmployeeShiftDTO empShift)
     {
-        EmployeeShift empShift = new EmployeeShift() {
-            EmpId = empShiftDTO.EmployeeId, 
-            ShiftId = empShiftDTO.ShiftId
+        var signedUpFor = GetEmpShifts(empShift.EmployeeId);
+        var toSignUpFor = await _shiftService.GetShiftById(empShift.ShiftId);
+
+
+        // For the shift we are adding, check to see if it overlaps with an existing shift we signed up for
+        DateTime ts = DateTime.Parse(toSignUpFor.StartTime);
+        DateTime te = DateTime.Parse(toSignUpFor.EndTime);
+        foreach (Shift s in signedUpFor)
+        {
+            DateTime ss = DateTime.Parse(s.StartTime);
+            DateTime se = DateTime.Parse(s.EndTime);
+            if ((ts > ss && ts < se) || (te > ss && te < se))
+            {
+                return;
+            }
+
+            // Check to see if we are signing up for the same shift
+            if (s.Id == toSignUpFor.Id)
+            {
+                return;
+            }
+        }
+
+        EmployeeShift e = new()
+        {
+            EmpId = empShift.EmployeeId,
+            ShiftId = empShift.ShiftId
         };
 
-        await _companyService.CreateEmployeeShift(empShift);
+        await _empShiftService.CreateEmployeeShift(e);
+    }
+
+    [HttpGet()]
+    public List<Shift> GetEmpShifts(int empId)
+    {
+        return _empShiftService.GetEmpShifts(empId);
     }
 }
