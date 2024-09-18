@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace practicum2425.Server.Data;
+﻿namespace practicum2425.Server.Data;
 
 public partial class EmployeeShift
 {

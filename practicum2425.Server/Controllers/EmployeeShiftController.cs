@@ -2,7 +2,6 @@
 using practicum2425.Server.Data;
 using practicum2425.Server.DTOs;
 using practicum2425.Server.Interfaces;
-using System.Collections.Immutable;
 
 namespace practicum2425.Server.Controllers;
 
@@ -20,18 +19,19 @@ public class EmployeeShiftController(IEmployeeShiftService service, IShiftServic
         var toSignUpFor = await _shiftService.GetShiftById(empShift.ShiftId);
 
 
+        // For the shift we are adding, check to see if it overlaps with an existing shift we signed up for
         DateTime ts = DateTime.Parse(toSignUpFor.StartTime);
         DateTime te = DateTime.Parse(toSignUpFor.EndTime);
         foreach (Shift s in signedUpFor)
         {
             DateTime ss = DateTime.Parse(s.StartTime);
             DateTime se = DateTime.Parse(s.EndTime);
-            // For the shift we are adding, check to see if it overlaps with an existing shift we signed up for
             if ((ts > ss && ts < se) || (te > ss && te < se))
             {
                 return;
             }
 
+            // Check to see if we are signing up for the same shift
             if (s.Id == toSignUpFor.Id)
             {
                 return;
