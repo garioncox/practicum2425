@@ -26,17 +26,17 @@ public class ProjectController : ControllerBase
 
         Project newProject = new Project()
         {
-           EndDate = project.endDate,
-           StartDate = project.startDate,
-           Location = project.location,
-           Name = project.name,
+           EndDate = project.EndDate,
+           StartDate = project.StartDate,
+           Location = project.Location,
+           Name = project.Name,
            Status = Shift.STATUS_ACTIVE
         };
 
-        Console.WriteLine(project.name + ":name");
-        Console.WriteLine(project.startDate + ":sdate");
-        Console.WriteLine(project.endDate + ":edate");
-        Console.WriteLine(project.location + ":location");
+        Console.WriteLine(project.Name + ":name");
+        Console.WriteLine(project.StartDate + ":sdate");
+        Console.WriteLine(project.EndDate + ":edate");
+        Console.WriteLine(project.Location + ":location");
 
 
         await _projectService.PostProject(newProject);
