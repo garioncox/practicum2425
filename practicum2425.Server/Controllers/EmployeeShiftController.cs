@@ -19,6 +19,10 @@ public class EmployeeShiftController(IEmployeeShiftService service, IShiftServic
 
         DateTime ts = DateTime.Parse(toSignUpFor.StartTime);
         DateTime te = DateTime.Parse(toSignUpFor.EndTime);
+        
+        // For the shift we are adding, 
+        // check to see if it overlaps with 
+        // an existing shift we signed up for
         foreach (Shift s in signedUpFor)
         {
             DateTime ss = DateTime.Parse(s.StartTime);

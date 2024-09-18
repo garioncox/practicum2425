@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using practicum2425.Server.Data;
+using practicum2425.Server.DTOs;
 using practicum2425.Server.Interfaces;
 using practicum2425.Server.Services;
 
@@ -17,5 +18,23 @@ public class ProjectController : ControllerBase
     public async Task<List<Project>> GetProjectListAsync()
     {
         return await _projectService.GetProjectListAsync();
+    }
+
+    [HttpPost()]
+    public async Task PostProject( [FromBody] ProjectDTO projectDTO)
+    {
+
+        Project project = new Project()
+        {
+           EndDate = projectDTO.EndDate,
+           StartDate = projectDTO.StartDate,
+           Location = projectDTO.Location,
+           Name = projectDTO.Name,
+           Status = Shift.STATUS_ACTIVE
+        };
+
+
+
+        await _projectService.PostProject(project);
     }
 }
