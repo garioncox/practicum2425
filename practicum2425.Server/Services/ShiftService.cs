@@ -29,4 +29,11 @@ public class ShiftService : IShiftService
     {
         return await _context.Shifts.ToListAsync();
     }
+
+    public async Task<Shift> GetShiftById(int id)
+    {
+        return await _context.Shifts
+            .Where(s => s.Id == id)
+            .FirstOrDefaultAsync();
+    }
 }

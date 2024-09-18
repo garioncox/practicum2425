@@ -18,4 +18,11 @@ public class EmployeeShiftService : IEmployeeShiftService
         _context.EmployeeShifts.Add(empShift);
         await _context.SaveChangesAsync();
     }
+
+    public List<Shift> GetEmpShifts(int empId)
+    {
+        return _context.Shifts
+            .Where(s => s.EmployeeShifts.Any(es => es.EmpId == empId))
+            .ToList();
+    }
 }
