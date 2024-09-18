@@ -21,24 +21,20 @@ public class ProjectController : ControllerBase
     }
 
     [HttpPost()]
-    public async Task PostProject( [FromBody] ProjectDTO project)
+    public async Task PostProject( [FromBody] ProjectDTO projectDTO)
     {
 
-        Project newProject = new Project()
+        Project project = new Project()
         {
-           EndDate = project.endDate,
-           StartDate = project.startDate,
-           Location = project.location,
-           Name = project.name,
+           EndDate = projectDTO.EndDate,
+           StartDate = projectDTO.StartDate,
+           Location = projectDTO.Location,
+           Name = projectDTO.Name,
            Status = Shift.STATUS_ACTIVE
         };
 
-        Console.WriteLine(project.name + ":name");
-        Console.WriteLine(project.startDate + ":sdate");
-        Console.WriteLine(project.endDate + ":edate");
-        Console.WriteLine(project.location + ":location");
 
 
-        await _projectService.PostProject(newProject);
+        await _projectService.PostProject(project);
     }
 }
