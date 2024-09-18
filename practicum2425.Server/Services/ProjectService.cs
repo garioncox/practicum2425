@@ -17,5 +17,11 @@ public class ProjectService : IProjectService
     {
         return await _context.Projects.ToListAsync();
     }
+
+    public async Task PostProject(Project project)
+    {
+        _context.Projects.Add(project);
+        await _context.SaveChangesAsync();
+    }
 }
 

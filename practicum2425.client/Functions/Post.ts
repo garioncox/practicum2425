@@ -1,4 +1,4 @@
-export const Post = async (urlString, upload) => {
+export const Post = async (urlString :string, upload) => {
     try {
         const myHeaders = new Headers();
         myHeaders.append("accept", "application/json");

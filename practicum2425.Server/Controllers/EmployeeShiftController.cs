@@ -16,9 +16,6 @@ public class EmployeeShiftController : ControllerBase
     [HttpPost()]
     public async Task CreateEmpShift( [FromBody] EmployeeShiftDTO empShiftDTO)
     {
-
-        Console.Write(empShiftDTO.EmployeeId + " : employeeId" + empShiftDTO.ShiftId + " : shiftId");
-
         EmployeeShift empShift = new EmployeeShift() {
             EmpId = empShiftDTO.EmployeeId, 
             ShiftId = empShiftDTO.ShiftId
