@@ -11,11 +11,11 @@ public partial class Project
 
     public string Location { get; set; } = null!;
 
-    public string? StartDate { get; set; }
+    public string StartDate { get; set; } = null!;
 
-    public string? EndDate { get; set; }
+    public string EndDate { get; set; } = null!;
 
-    public string? Status { get; set; }
+    public string Status { get; set; } = null!;
 
     public virtual ICollection<CompanyProject> CompanyProjects { get; set; } = new List<CompanyProject>();
 

@@ -60,10 +60,12 @@ public partial class PostgresContext : DbContext
 
             entity.HasOne(d => d.Company).WithMany(p => p.CompanyProjects)
                 .HasForeignKey(d => d.CompanyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("company_project_company_id_fkey");
 
             entity.HasOne(d => d.Project).WithMany(p => p.CompanyProjects)
                 .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("company_project_project_id_fkey");
         });
 
@@ -87,21 +89,23 @@ public partial class PostgresContext : DbContext
             entity.ToTable("employee_shift", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ClockInTime)
+                .HasMaxLength(20)
+                .HasColumnName("clock_in_time");
+            entity.Property(e => e.ClockOutTime)
+                .HasMaxLength(20)
+                .HasColumnName("clock_out_time");
             entity.Property(e => e.EmpId).HasColumnName("emp_id");
-            entity.Property(e => e.EndTime)
-                .HasMaxLength(20)
-                .HasColumnName("end_time");
             entity.Property(e => e.ShiftId).HasColumnName("shift_id");
-            entity.Property(e => e.StartTime)
-                .HasMaxLength(20)
-                .HasColumnName("start_time");
 
             entity.HasOne(d => d.Emp).WithMany(p => p.EmployeeShifts)
                 .HasForeignKey(d => d.EmpId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("employee_shift_emp_id_fkey");
 
             entity.HasOne(d => d.Shift).WithMany(p => p.EmployeeShifts)
                 .HasForeignKey(d => d.ShiftId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("employee_shift_shift_id_fkey");
         });
 
@@ -141,10 +145,12 @@ public partial class PostgresContext : DbContext
 
             entity.HasOne(d => d.Project).WithMany(p => p.ProjectShifts)
                 .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("project_shift_project_id_fkey");
 
             entity.HasOne(d => d.Shift).WithMany(p => p.ProjectShifts)
                 .HasForeignKey(d => d.ShiftId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("project_shift_shift_id_fkey");
         });
 
