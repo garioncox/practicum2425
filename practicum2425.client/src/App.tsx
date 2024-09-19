@@ -6,7 +6,6 @@ import ViewProject from '../Components/ViewProject';
 import { Shift } from '../DataInterface/ShiftInterface';
 import ShiftForm from '../Components/ShiftForm'
 
-
 function App() {
     const [shifts, setShifts] = useState<Shift[]>()
     return (
