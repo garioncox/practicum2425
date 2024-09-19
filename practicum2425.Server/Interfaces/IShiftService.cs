@@ -6,4 +6,5 @@ public interface IShiftService
 {
     public Task<List<Shift>> GetAllShifts();
     public Task<Shift> GetShiftById(int id);
+    public Task CreateShift(Shift shift);
 }

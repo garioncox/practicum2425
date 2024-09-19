@@ -24,7 +24,13 @@ public class ShiftService : IShiftService
             _context.Shifts.Update(shift);
         }
     }
-    
+
+    public async Task CreateShift(Shift shift)
+    {
+        _context.Shifts.Add(shift);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<List<Shift>> GetAllShifts()
     {
         return await _context.Shifts.ToListAsync();

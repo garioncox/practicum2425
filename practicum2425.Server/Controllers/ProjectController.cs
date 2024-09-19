@@ -21,7 +21,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpPost()]
-    public async Task PostProject( [FromBody] ProjectDTO projectDTO)
+    public async Task CreateProject( [FromBody] ProjectDTO projectDTO)
     {
 
         Project project = new Project()
@@ -33,8 +33,6 @@ public class ProjectController : ControllerBase
            Status = Shift.STATUS_ACTIVE
         };
 
-
-
-        await _projectService.PostProject(project);
+        await _projectService.CreateProject(project);
     }
 }
