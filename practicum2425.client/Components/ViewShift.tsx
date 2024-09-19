@@ -26,7 +26,7 @@ const ViewShift: FC<{
             ShiftId: id
         }
 
-        Post('https://localhost:7157/api/EmployeeShift/', employee)
+        Post(import.meta.env.API_PATH + 'api/EmployeeShift/', employee)
 
     }
 
