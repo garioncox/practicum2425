@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import ViewShift from '../Components/ViewShift';
-import ViewCompany from '../Components/ViewCompany'
 import ProjectForm from '../Components/ProjectForm';
 import ViewProject from '../Components/ViewProject';
 import { Shift } from '../DataInterface/ShiftInterface';
@@ -11,13 +10,15 @@ function App() {
 
     return (
         <>
-            <ViewCompany />
             <ViewShift
                 shifts={shifts}
                 setShifts={setShifts}
             />
+            <hr />
             <ViewProject />
+            <hr />
             <ProjectForm />
+            <hr />
             <ShiftForm />
         </>
     );

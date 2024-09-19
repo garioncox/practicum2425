@@ -14,17 +14,33 @@ function ViewProject() {
         const data = await response.json();
         setProjects(data);
     }
-    
+
     const contents = projects === undefined ? <Spinner /> : (
-      <div>
-          {projects.map(c =>
-              <p key={c.id}>{c.id}: {c.name}, {c.location}</p>
-          )}
-      </div>)
-    
+        <div>
+
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {projects.map(p =>
+                        <tr>
+                            <th scope="row">{p.id}</th>
+                            <td>{p.name}</td>
+                            <td>{p.location}</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+        </div>) 
+
     return (
         <div >
-            <h1 id="projects"> Project List</h1>
+            <h1 id="projects">Project List</h1>
             {contents}
         </div>
     )

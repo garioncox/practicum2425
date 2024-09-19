@@ -18,7 +18,6 @@ function ProjectForm() {
         }
 
         Post('https://localhost:7157/api/Project', project)
-
     }
 
     return (
@@ -38,7 +37,7 @@ function ProjectForm() {
                     />
                 </div>
                 <div className="col-md-2 mb-3">
-                    <label htmlFor="validationDefault02">Start Date</label>
+                    <label htmlFor="validationDefault02">Start</label>
                     <input
                         type="date"
                         className="form-control"
@@ -50,7 +49,7 @@ function ProjectForm() {
                     />
                 </div>
                 <div className="col-md-2 mb-3">
-                    <label htmlFor="validationDefaultUsername">End Date</label>
+                    <label htmlFor="validationDefaultUsername">End</label>
                     <div className="input-group">
                         <input
                             type="date"
@@ -87,7 +86,6 @@ function ProjectForm() {
             }>
                 Create Project
             </button>
-            <hr></hr>
         </form>
     );
 }
