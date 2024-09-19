@@ -20,7 +20,7 @@ function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <Profile></Profile>
+            <Profile />
 
             <span className="navbar-toggler-icon"></span>
           </button>
