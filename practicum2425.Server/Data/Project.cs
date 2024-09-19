@@ -17,6 +17,8 @@ public partial class Project
 
     public string Status { get; set; } = null!;
 
+    public string? Description { get; set; }
+
     public virtual ICollection<CompanyProject> CompanyProjects { get; set; } = new List<CompanyProject>();
 
     public virtual ICollection<ProjectShift> ProjectShifts { get; set; } = new List<ProjectShift>();

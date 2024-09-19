@@ -1,4 +1,7 @@
-﻿namespace practicum2425.Server.Data;
+﻿using System;
+using System.Collections.Generic;
+
+namespace practicum2425.Server.Data;
 
 public partial class Shift
 {

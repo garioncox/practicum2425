@@ -116,6 +116,9 @@ public partial class PostgresContext : DbContext
             entity.ToTable("project", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Description)
+                .HasMaxLength(300)
+                .HasColumnName("description");
             entity.Property(e => e.EndDate)
                 .HasMaxLength(20)
                 .HasColumnName("end_date");
