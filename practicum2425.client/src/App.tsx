@@ -8,7 +8,6 @@ import ShiftForm from '../Components/ShiftForm'
 
 function App() {
     const [shifts, setShifts] = useState<Shift[]>()
-
     return (
         <>
             <ViewCompany />
