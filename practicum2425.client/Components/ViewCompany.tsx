@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Company } from '../DataInterface/CompanyInterface';
 import Spinner from './Spinner'
+import * as React from 'react';
 
 function ViewProject() {
     const [companies, setCompanies] = useState<Company[]>();
@@ -10,7 +11,7 @@ function ViewProject() {
     }, []);
 
     async function populateCompanyData() {
-        const response = await fetch('/api/Company/GetCompanies');
+        const response = await fetch(import.meta.env.VITE_API_URL + 'api/Company/GetCompanies');
         const data = await response.json();
         setCompanies(data);
     }

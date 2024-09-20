@@ -10,7 +10,7 @@ function ViewProject() {
     }, [])
 
     async function populateProjects() {
-        const response = await fetch('/api/Project/GetProjects');
+        const response = await fetch(import.meta.env.VITE_API_URL + 'api/Project/GetProjects');
         const data = await response.json();
         setProjects(data);
     }
@@ -28,7 +28,7 @@ function ViewProject() {
                 </thead>
                 <tbody>
                     {projects.map(p =>
-                        <tr>
+                        <tr key={p.id}>
                             <th scope="row">{p.id}</th>
                             <td>{p.name}</td>
                             <td>{p.location}</td>

@@ -23,7 +23,7 @@ const ViewShift: FC<{
                 <td> <input className="form-control" value={s.location} /> </td>
                 <td> <input className="form-control" value={s.startTime} /> </td>
                 <td> <input className="form-control" value={s.endTime} /> </td>
-                <td> <button className="btn btn-success"> Save </button> </td>
+                <td> <button className="btn btn-success" disabled> Save </button> </td>
                 <td> <button onClick={() => handleEdit(-1)} className="btn btn-danger"> Cancel </button> </td>
             </tr>
         ) : (
@@ -32,7 +32,7 @@ const ViewShift: FC<{
                 <td>{s.startTime}</td>
                 <td>{s.endTime}</td>
                 <td> <button onClick={() => handleEdit(s.id)} className="btn btn-warning"> Edit </button> </td>
-                <td> <button className="btn btn-danger"> Delete </button> </td>
+                <td> <button className="btn btn-danger" disabled> Delete </button> </td>
             </tr>
         )
         return val
@@ -44,9 +44,11 @@ const ViewShift: FC<{
         ) : (
             <table className="table table-striped">
                 <thead>
-                    <th>Location</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
+                    <tr>
+                        <th>Location</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
                 </thead>
                 <tbody>
 
@@ -58,19 +60,18 @@ const ViewShift: FC<{
         );
 
     async function populateShifts() {
-        const response = await fetch('/api/Shift/GetShifts');
+        const response = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get');
         const data = await response.json();
         setShifts(data);
     }
-    
+
     return (
         <div >
             <h1 id="shifts"> Shift List</h1>
             {contents}
-            
+
         </div>
     )
 }
 
 export default ViewShift
-

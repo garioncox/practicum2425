@@ -18,7 +18,7 @@ function ShiftForm() {
             RequestedEmployees: requestedEmployees,
         }
 
-        Post('https://localhost:7157/api/Shift', shift)
+        Post(import.meta.env.VITE_API_URL + 'api/Shift/create', shift)
     }
 
     return (
