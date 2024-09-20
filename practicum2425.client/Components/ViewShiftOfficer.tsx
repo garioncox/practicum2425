@@ -20,26 +20,28 @@ const ViewShiftOfficer: FC<{
         ) : (
             <table className="table table-striped">
                 <thead>
-                    <th>Location</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
+                    <tr>
+                        <th>Location</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
                 </thead>
                 <tbody>
 
-                        {shifts.map((s) => (
-                            <tr key={s.id}>
+                    {shifts.map((s) => (
+                        <tr key={s.id}>
                             <td>{s.location}</td>
                             <td>{s.startTime}</td>
                             <td>{s.endTime}</td>
                             <td> <button className="btn btn-primary" onClick={() => postEmployeeShift(s.id)}>Take This Shift</button> </td>
-                        </tr>) )}
-                    
+                        </tr>))}
+
                 </tbody>
             </table>
         );
 
     async function populateShifts() {
-        const response = await fetch('/api/Shift/GetShifts');
+        const response = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get');
         const data = await response.json();
         setShifts(data);
     }
@@ -50,7 +52,7 @@ const ViewShiftOfficer: FC<{
             ShiftId: id
         }
 
-        Post('https://localhost:7157/api/EmployeeShift/', employee)
+        Post(import.meta.env.VITE_API_URL + 'api/EmployeeShift/', employee)
 
     }
 

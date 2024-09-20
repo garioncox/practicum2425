@@ -2,7 +2,6 @@
 using practicum2425.Server.Data;
 using practicum2425.Server.DTOs;
 using practicum2425.Server.Interfaces;
-using practicum2425.Server.Services;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -14,13 +13,13 @@ public class ShiftController : ControllerBase
         _shiftService = service;
     }
 
-    [HttpGet("GetShifts")]
+    [HttpGet("get")]
     public async Task<List<Shift>> GetShiftsListAsync()
     {
         return await _shiftService.GetAllShifts();
     }
 
-    [HttpPost()]
+    [HttpPost("create")]
     public async Task CreateShift([FromBody] ShiftDTO shiftDTO )
     {
         Shift shift = new Shift()

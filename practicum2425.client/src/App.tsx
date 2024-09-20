@@ -21,6 +21,7 @@ function App() {
             <ProjectForm />
             <hr />
             <ShiftForm />
+            <hr />
             <ViewShiftofficer shifts={shifts} setShifts={setShifts} />
         </>
     );

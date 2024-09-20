@@ -17,7 +17,7 @@ function ProjectForm() {
             endDate: endDate,
         }
 
-        Post('https://localhost:7157/api/Project', project)
+        Post(import.meta.env.VITE_API_URL + 'api/Project', project)
     }
 
     return (
