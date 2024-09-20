@@ -4,6 +4,7 @@ import ProjectForm from '../Components/ProjectForm';
 import ViewProject from '../Components/ViewProject';
 import { Shift } from '../DataInterface/ShiftInterface';
 import ShiftForm from '../Components/ShiftForm'
+import ViewShiftofficer from '../Components/ViewShiftOfficer'
 
 function App() {
     const [shifts, setShifts] = useState<Shift[]>()
@@ -20,6 +21,7 @@ function App() {
             <ProjectForm />
             <hr />
             <ShiftForm />
+            <ViewShiftofficer shifts={shifts} setShifts={setShifts} />
         </>
     );
 }

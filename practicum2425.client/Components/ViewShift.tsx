@@ -1,46 +1,67 @@
-import { useEffect, FC } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
 import Spinner from './Spinner'
-import { Post } from "../Functions/Post"
-import { EmployeeShiftDTO } from '../DataDTOInterfaces/EmployeeShiftDTOInterface'
-
 
 const ViewShift: FC<{
     setShifts: (s: Shift[]) => void;
     shifts: Shift[] | undefined
 }> = ({ shifts, setShifts }) => {
-    
+
+    const [selected, setSelected] = useState<number>()
+
     useEffect(() => {
         populateShifts();
-    },[])
+    }, [])
+
+    function handleEdit(id: number) {
+        setSelected(id)
+    }
+
+    function checkSelected(s: Shift) {
+        const val = s.id === selected ? (
+            <tr key={s.id}>
+                <td> <input className="form-control" value={s.location} /> </td>
+                <td> <input className="form-control" value={s.startTime} /> </td>
+                <td> <input className="form-control" value={s.endTime} /> </td>
+                <td> <button className="btn btn-success"> Save </button> </td>
+                <td> <button onClick={() => handleEdit(-1)} className="btn btn-danger"> Cancel </button> </td>
+            </tr>
+        ) : (
+            <tr key={s.id}>
+                <td>{s.location}</td>
+                <td>{s.startTime}</td>
+                <td>{s.endTime}</td>
+                <td> <button onClick={() => handleEdit(s.id)} className="btn btn-warning"> Edit </button> </td>
+                <td> <button className="btn btn-danger"> Delete </button> </td>
+            </tr>
+        )
+        return val
+    }
+
+    const contents =
+        shifts === undefined ? (
+            <Spinner />
+        ) : (
+            <table className="table table-striped">
+                <thead>
+                    <th>Location</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </thead>
+                <tbody>
+
+                    {shifts.map((s) => (
+                        checkSelected(s)
+                    ))}
+                </tbody>
+            </table>
+        );
 
     async function populateShifts() {
         const response = await fetch('/api/Shift/GetShifts');
         const data = await response.json();
         setShifts(data);
     }
-
-    async function postEmployeeShift(id:number) {
-        const employee: EmployeeShiftDTO = {
-            EmployeeId : 1,
-            ShiftId: id
-        }
-
-        Post(import.meta.env.API_PATH + 'api/EmployeeShift/', employee)
-
-    }
-
-    const contents =
-      shifts === undefined ? <Spinner /> : (
-        <div>
-                    {shifts.map((s) => (
-              <>
-              <p key={s.id}> {s.location} : {s.startTime} - {s.endTime}</p>
-              <button onClick={()=> postEmployeeShift(s.id) }>Take This Shift</button>
-              </>
-          ))}
-        </div>
-      );
     
     return (
         <div >
@@ -52,3 +73,4 @@ const ViewShift: FC<{
 }
 
 export default ViewShift
+
