@@ -21,7 +21,7 @@ function ShiftForm() {
             Status: status
         }
 
-        Post('https://localhost:7157/api/Shift', shift)
+        Post('https://localhost:7157/api/Shift/create', shift)
     }
 
     return (

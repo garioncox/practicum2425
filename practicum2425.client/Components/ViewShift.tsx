@@ -15,7 +15,7 @@ const ViewShift: FC<{
     },[])
 
     async function populateShifts() {
-        const response = await fetch('/api/Shift/GetShifts');
+        const response = await fetch('/api/Shift/get');
         const data = await response.json();
         setShifts(data);
     }
