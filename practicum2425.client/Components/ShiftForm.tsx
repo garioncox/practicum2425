@@ -8,8 +8,6 @@ function ShiftForm() {
     const [description, setDescription] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [requestedEmployees, setRequestedEmployees] = useState<number>(0)
-    const [status, setStatus] = useState<string>("ACTIVE")
-
 
     async function postShift() {
         const shift: ShiftDTO = {
@@ -18,7 +16,6 @@ function ShiftForm() {
             Description: description,
             Location: location,
             RequestedEmployees: requestedEmployees,
-            Status: status
         }
 
         Post('https://localhost:7157/api/Shift', shift)
@@ -41,7 +38,7 @@ function ShiftForm() {
                     />
                 </div>
                 <div className="col-md-2 mb-3">
-                    <label htmlFor="validationDefault02">Start Date</label>
+                    <label htmlFor="validationDefault02">Start</label>
                     <input
                         value={startTime}
                         onChange={(e) => { setStartTime(e.target.value) }}
@@ -53,7 +50,7 @@ function ShiftForm() {
                     />
                 </div>
                 <div className="col-md-2 mb-3">
-                    <label htmlFor="validationDefaultUsername">End Date</label>
+                    <label htmlFor="validationDefaultUsername">End</label>
                     <div className="input-group">
                         <input
                             value={endTime}
@@ -99,24 +96,10 @@ function ShiftForm() {
                         required
                     />
                 </div>
-                <div className="col-md-4 mb-4">
-                    <div className="form-group">
-                        <label htmlFor="statusSelect">Choose a status</label>
-                        <select id="statusSelect" className="form-control"
-                            value={status}
-                            onChange={(e) => { setStatus(e.target.value) }}
-                        >
-                            <option value="ACTIVE">ACTIVE</option>
-                            <option value="ARCHIVED">ARCHIVED</option>
-                        </select>
-                    </div>
-                </div>
-
             </div>
             <button className="btn btn-primary" type="button" onClick={() => { postShift() } }>
                 Create Project
             </button>
-            <hr></hr>
         </form>
     );
 }
