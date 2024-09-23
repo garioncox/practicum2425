@@ -12,7 +12,7 @@ public class ShiftService : IShiftService
         _context = context;
     }
 
-    public async Task CancelShiftAsync(int shift_id)
+    public async Task ArchiveShiftAsync(int shift_id)
     {
         Shift? shift = await _context.Shifts
             .Where(s => s.Id == shift_id)
@@ -22,6 +22,7 @@ public class ShiftService : IShiftService
         {
             shift.Status = Shift.STATUS_ARCHIVED;
             _context.Shifts.Update(shift);
+            await _context.SaveChangesAsync();
         }
     }
 
@@ -41,5 +42,19 @@ public class ShiftService : IShiftService
         return await _context.Shifts
             .Where(s => s.Id == id)
             .FirstOrDefaultAsync();
+    }
+
+    public async Task CancelShift(int shift_id)
+    {
+        Shift? s = await _context.Shifts
+            .Where(s => s.Id == shift_id)
+            .FirstOrDefaultAsync();
+
+        if (s == null) { return; }
+
+        s.Status = Shift.STATUS_ARCHIVED;
+
+        _context.Shifts.Update(s);
+        await _context.SaveChangesAsync();
     }
 }

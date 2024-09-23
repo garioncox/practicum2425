@@ -22,7 +22,7 @@ public class ShiftController : ControllerBase
     [HttpPost("create")]
     public async Task CreateShift([FromBody] ShiftDTO shiftDTO )
     {
-        Shift shift = new Shift()
+        Shift shift = new()
         {
             StartTime = shiftDTO.StartTime,
             EndTime = shiftDTO.EndTime,
@@ -33,5 +33,11 @@ public class ShiftController : ControllerBase
         };
 
         await _shiftService.CreateShift(shift);
+    }
+
+    [HttpPost("archive")]
+    public async Task ArchiveShift(int shiftId)
+    {
+        await _shiftService.ArchiveShiftAsync(shiftId);
     }
 }
