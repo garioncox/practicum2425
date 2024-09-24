@@ -25,4 +25,17 @@ public class EmployeeShiftService : IEmployeeShiftService
             .Where(s => s.EmployeeShifts.Any(es => es.EmpId == empId))
             .ToList();
     }
+
+    public async Task DeleteEmpShiftAsync(int empShiftId)
+    {
+        EmployeeShift? shift = _context.EmployeeShifts
+            .Where(s => s.Id == empShiftId)
+            .FirstOrDefault();
+
+        if (shift != null)
+        {
+            _context.EmployeeShifts.Remove(shift);
+            await _context.SaveChangesAsync();
+        }
+    }
 }
