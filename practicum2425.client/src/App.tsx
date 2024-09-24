@@ -1,15 +1,12 @@
-import { useState } from 'react';
 import ViewShift from '../Components/ViewShift';
 import ProjectForm from '../Components/ProjectForm';
 import ViewProject from '../Components/ViewProject';
-import { Shift } from '../DataInterface/ShiftInterface';
 import ShiftForm from '../Components/ShiftForm'
 import ViewShiftofficer from '../Components/ViewShiftOfficer'
 import { Route, Routes } from 'react-router-dom';
 import Home from '../Components/Home'
 
 function App() {
-    const [shifts, setShifts] = useState<Shift[]>()
 
     return (
         <>

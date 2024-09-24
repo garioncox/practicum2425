@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ShiftDTO } from "../DataDTOInterfaces/ShiftDTOInterface"
-import { Post } from "../Functions/Post"
+import { httpRequest } from "../Functions/Post"
 
 function ShiftForm() {
     const [startTime, setStartTime] = useState<string>("")
@@ -19,7 +19,7 @@ function ShiftForm() {
             Status: "ACTIVE"
         }
 
-        Post(import.meta.env.VITE_API_URL + 'api/Shift/create', shift)
+        httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/create', shift, "POST")
     }
 
     return (

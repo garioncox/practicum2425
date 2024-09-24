@@ -1,14 +1,12 @@
-import { useEffect, FC } from 'react';
+import { useEffect, useState } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
-import { Post } from "../Functions/Post"
+import { httpRequest } from "../Functions/Post"
 import { EmployeeShiftDTO } from '../DataDTOInterfaces/EmployeeShiftDTOInterface'
 import Spinner from './Spinner'
 
 
-const ViewShiftOfficer: FC<{
-    setShifts: (s: Shift[]) => void;
-    shifts: Shift[] | undefined
-}> = ({ shifts, setShifts }) => {
+function ViewShiftOfficer() {
+    const [shifts, setShifts] = useState<Shift[]>()
 
     useEffect(() => {
         populateShifts();
@@ -52,7 +50,7 @@ const ViewShiftOfficer: FC<{
             ShiftId: id
         }
 
-        Post(import.meta.env.VITE_API_URL + 'api/EmployeeShift/', employee)
+        httpRequest(import.meta.env.VITE_API_URL + 'api/EmployeeShift/', employee, "POST")
 
     }
 

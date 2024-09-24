@@ -19,10 +19,16 @@ public class ShiftController : ControllerBase
         return await _shiftService.GetAllShifts();
     }
 
+    [HttpGet("get/archived")]
+    public async Task<List<Shift>> GetArchivedAndCompletedShiftsAsync()
+    {
+        return await _shiftService.GetAllArchivedAndCompletedShifts();
+    }
+
     [HttpPost("create")]
     public async Task CreateShift([FromBody] ShiftDTO shiftDTO)
     {
-        Shift shift = new Shift()
+        Shift shift = new()
         {
             StartTime = shiftDTO.StartTime,
             EndTime = shiftDTO.EndTime,
@@ -33,5 +39,17 @@ public class ShiftController : ControllerBase
         };
 
         await _shiftService.CreateShift(shift);
+    }
+
+    [HttpPost("archive")]
+    public async Task ArchiveShift(int shiftId)
+    {
+        await _shiftService.ArchiveShiftAsync(shiftId);
+    }
+
+    [HttpPut("Edit/{id}")]
+    public async Task EditShift([FromBody] Shift shift, int id)
+    {
+        await _shiftService.EditShift(shift);
     }
 }
