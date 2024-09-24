@@ -8,4 +8,5 @@ public interface IShiftService
     public Task<Shift> GetShiftById(int id);
     public Task CreateShift(Shift shift);
     public Task ArchiveShiftAsync(int shiftId);
+    public Task EditShift(Shift shift);
 }

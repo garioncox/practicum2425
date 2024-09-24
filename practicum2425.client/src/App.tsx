@@ -22,7 +22,10 @@ function App() {
             <hr />
             <ShiftForm />
             <hr />
-            <ViewShiftofficer shifts={shifts} setShifts={setShifts} />
+            <ViewShiftofficer
+                shifts={shifts}
+                setShifts={setShifts}
+            />
         </>
     );
 }

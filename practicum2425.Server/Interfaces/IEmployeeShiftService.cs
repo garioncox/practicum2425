@@ -3,5 +3,6 @@
 public interface IEmployeeShiftService
 { 
     Task CreateEmployeeShift(EmployeeShift empShift);
-    List<Shift> GetScheduledShiftsByEmpId(int empId);
+    List<Shift> GetEmpShifts(int empId);
+    Task DeleteEmpShiftAsync(int shiftId);
 }

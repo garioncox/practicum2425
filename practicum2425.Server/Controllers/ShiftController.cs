@@ -20,7 +20,7 @@ public class ShiftController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task CreateShift([FromBody] ShiftDTO shiftDTO )
+    public async Task CreateShift([FromBody] ShiftDTO shiftDTO)
     {
         Shift shift = new()
         {
@@ -29,7 +29,7 @@ public class ShiftController : ControllerBase
             Description = shiftDTO.Description,
             Location = shiftDTO.Location,
             RequestedEmployees = shiftDTO.RequestedEmployees,
-            Status = shiftDTO.Status,
+            Status = Shift.STATUS_ACTIVE,
         };
 
         await _shiftService.CreateShift(shift);
@@ -39,5 +39,10 @@ public class ShiftController : ControllerBase
     public async Task ArchiveShift(int shiftId)
     {
         await _shiftService.ArchiveShiftAsync(shiftId);
+
+    [HttpPut("Edit/{id}")]
+    public async Task EditShift([FromBody] Shift shift, int id)
+    {
+        await _shiftService.EditShift(shift);
     }
 }
