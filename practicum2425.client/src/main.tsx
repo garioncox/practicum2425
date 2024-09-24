@@ -4,8 +4,11 @@ import App from './App.tsx'
 import Navbar from '../Components/Navbar.tsx'
 import './index.css'
 import Sidebar from './components/Sidebar.tsx'
+import { BrowserRouter } from 'react-router-dom'
+import ReactDOM from 'react-dom'
 
-createRoot(document.getElementById("root")!).render(
+ReactDOM.render(
+    <BrowserRouter>
     <StrictMode>
         <div className="text-center vh-100">
             <div className="row h-100">
@@ -24,4 +27,6 @@ createRoot(document.getElementById("root")!).render(
             </div>
         </div>
     </StrictMode>,
+    </BrowserRouter>,
+    document.getElementById("root")
 )
