@@ -40,7 +40,9 @@ public class ShiftService : IShiftService
 
     public async Task<List<Shift>> GetAllShifts()
     {
-        return await _context.Shifts.ToListAsync();
+        return await _context.Shifts
+            .Where(s => s.Status == Shift.STATUS_ACTIVE)
+            .ToListAsync();
     }
 
     public async Task<Shift> GetShiftById(int id)
