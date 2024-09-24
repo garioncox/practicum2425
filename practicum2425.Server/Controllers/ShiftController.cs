@@ -19,6 +19,12 @@ public class ShiftController : ControllerBase
         return await _shiftService.GetAllShifts();
     }
 
+    [HttpGet("get/archived")]
+    public async Task<List<Shift>> GetArchivedAndCompletedShiftsAsync()
+    {
+        return await _shiftService.GetAllArchivedAndCompletedShifts();
+    }
+
     [HttpPost("create")]
     public async Task CreateShift([FromBody] ShiftDTO shiftDTO)
     {

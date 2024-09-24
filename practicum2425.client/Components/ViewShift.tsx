@@ -1,13 +1,9 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
 import Spinner from './Spinner'
 import { httpRequest } from '../Functions/Post';
 
-const ViewShift: FC<{
-    setShifts: (s: Shift[]) => void;
-    shifts: Shift[] | undefined
-}> = ({ shifts, setShifts }) => {
-
+function ViewShift() {
     const [selected, setSelected] = useState<number>()
 
     const [selectLocation, setLocation] = useState<string>("")
@@ -15,6 +11,8 @@ const ViewShift: FC<{
     const [selectEndTime, setEndTime] = useState<string>("")
     const [selectDescription, setDescription] = useState<string>("")
     const [selectReqEmployees, setReqEmployees] = useState<number>(-1)
+
+    const [shifts, setShifts] = useState<Shift[]>()
 
     useEffect(() => {
         populateShifts();
@@ -54,7 +52,7 @@ const ViewShift: FC<{
         const shift = findShift()
 
         const newShift: Shift = {
-            location : selectLocation ,
+            location: selectLocation,
             id: shift!.id,
             startTime: selectStartTime,
             endTime: selectEndTime,
@@ -70,7 +68,7 @@ const ViewShift: FC<{
     function checkSelected(s: Shift) {
         const val = s.id === selected ? (
             <tr key={s.id}>
-                <td> <input className="form-control" onChange={(e) => setLocation(e.target.value) } value={selectLocation} /> </td>
+                <td> <input className="form-control" onChange={(e) => setLocation(e.target.value)} value={selectLocation} /> </td>
                 <td> <input className="form-control" onChange={(e) => setStartTime(e.target.value)} value={selectStartTime} /> </td>
                 <td> <input className="form-control" onChange={(e) => setEndTime(e.target.value)} value={selectEndTime} /> </td>
                 <td> <input className="form-control" onChange={(e) => setDescription(e.target.value)} value={selectDescription} /> </td>
@@ -83,10 +81,10 @@ const ViewShift: FC<{
             <tr key={s.id}>
                 <td>{s.location}</td>
                 <td>{s.startTime}</td>
-                    <td>{s.endTime}</td>
-                    <td>{s.description}</td>
-                    <td>{s.requestedEmployees}</td>
-                    <td>{s.status} </td>
+                <td>{s.endTime}</td>
+                <td>{s.description}</td>
+                <td>{s.requestedEmployees}</td>
+                <td>{s.status} </td>
                 <td> <button onClick={() => handleEdit(s.id)} className="btn btn-warning"> Edit </button> </td>
                 <td> <button className="btn btn-danger" disabled> Delete </button> </td>
             </tr>
@@ -116,9 +114,13 @@ const ViewShift: FC<{
         );
 
     async function populateShifts() {
-        const response = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get');
-        const data = await response.json();
-        setShifts(data);
+        const r1 = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get/archived');
+        const archived = await r1.json();
+
+        const r2 = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get');
+        const active = await r2.json();
+
+        setShifts([...archived, ...active]);
     }
 
     return (
