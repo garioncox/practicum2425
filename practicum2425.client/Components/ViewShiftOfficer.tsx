@@ -1,14 +1,12 @@
-import { useEffect, FC } from 'react';
+import { useEffect, useState } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
 import { httpRequest } from "../Functions/Post"
 import { EmployeeShiftDTO } from '../DataDTOInterfaces/EmployeeShiftDTOInterface'
 import Spinner from './Spinner'
 
 
-const ViewShiftOfficer: FC<{
-    setShifts: (s: Shift[]) => void;
-    shifts: Shift[] | undefined
-}> = ({ shifts, setShifts }) => {
+function ViewShiftOfficer() {
+    const [shifts, setShifts] = useState<Shift[]>()
 
     useEffect(() => {
         populateShifts();

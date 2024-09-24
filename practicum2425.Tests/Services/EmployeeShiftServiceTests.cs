@@ -48,7 +48,7 @@ internal class EmployeeShiftServiceTests
 
         var empShiftServiceMock = new Mock<IEmployeeShiftService>();
         empShiftServiceMock.Setup(m => m
-            .GetEmpShifts(It.IsAny<int>()))
+            .GetScheduledShiftsByEmpId(It.IsAny<int>()))
             .Returns([shifts[1]]);
 
         // ACT
@@ -57,7 +57,7 @@ internal class EmployeeShiftServiceTests
 
         // ASSERT
         shiftServiceMock.Verify(m => m.GetShiftById(It.IsAny<int>()), Times.Once());
-        empShiftServiceMock.Verify(m => m.GetEmpShifts(It.IsAny<int>()), Times.Once());
+        empShiftServiceMock.Verify(m => m.GetScheduledShiftsByEmpId(It.IsAny<int>()), Times.Once());
         empShiftServiceMock.Verify(m => m.CreateEmployeeShift(It.IsAny<EmployeeShift>()), Times.Never());
     }
 
@@ -89,7 +89,7 @@ internal class EmployeeShiftServiceTests
 
         var empShiftServiceMock = new Mock<IEmployeeShiftService>();
         empShiftServiceMock.Setup(m => m
-            .GetEmpShifts(It.IsAny<int>()))
+            .GetScheduledShiftsByEmpId(It.IsAny<int>()))
             .Returns([shifts[0]]);
 
         // ACT
@@ -98,7 +98,7 @@ internal class EmployeeShiftServiceTests
 
         // ASSERT
         shiftServiceMock.Verify(m => m.GetShiftById(It.IsAny<int>()), Times.Once());
-        empShiftServiceMock.Verify(m => m.GetEmpShifts(It.IsAny<int>()), Times.Once());
+        empShiftServiceMock.Verify(m => m.GetScheduledShiftsByEmpId(It.IsAny<int>()), Times.Once());
         empShiftServiceMock.Verify(m => m.CreateEmployeeShift(It.IsAny<EmployeeShift>()), Times.Never());
     }
 }
