@@ -49,18 +49,4 @@ public class ShiftService : IShiftService
             .Where(s => s.Id == id)
             .FirstOrDefaultAsync();
     }
-
-    public async Task CancelShift(int shift_id)
-    {
-        Shift? s = await _context.Shifts
-            .Where(s => s.Id == shift_id)
-            .FirstOrDefaultAsync();
-
-        if (s == null) { return; }
-
-        s.Status = Shift.STATUS_ARCHIVED;
-
-        _context.Shifts.Update(s);
-        await _context.SaveChangesAsync();
-    }
 }

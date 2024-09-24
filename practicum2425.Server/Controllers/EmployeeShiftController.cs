@@ -54,7 +54,7 @@ public class EmployeeShiftController(IEmployeeShiftService service, IShiftServic
     }
 
     [HttpGet("getShifts")]
-    public List<Shift> GetEmpShifts(int empId)
+    public List<Shift> GetShiftsByEmpId(int empId)
     {
         return _empShiftService.GetScheduledShiftsByEmpId(empId);
     }

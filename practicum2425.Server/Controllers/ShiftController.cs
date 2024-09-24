@@ -39,6 +39,7 @@ public class ShiftController : ControllerBase
     public async Task ArchiveShift(int shiftId)
     {
         await _shiftService.ArchiveShiftAsync(shiftId);
+    }
 
     [HttpPut("Edit/{id}")]
     public async Task EditShift([FromBody] Shift shift, int id)
