@@ -16,6 +16,7 @@ function ShiftForm() {
             Description: description,
             Location: location,
             RequestedEmployees: requestedEmployees,
+            Status: "ACTIVE"
         }
 
         Post(import.meta.env.VITE_API_URL + 'api/Shift/create', shift)
