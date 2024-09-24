@@ -4,4 +4,5 @@ export interface ShiftDTO {
     Description: string
     Location: string
     RequestedEmployees: number
+    Status: string
 }

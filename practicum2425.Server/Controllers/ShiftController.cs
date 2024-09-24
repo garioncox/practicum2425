@@ -20,7 +20,7 @@ public class ShiftController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task CreateShift([FromBody] ShiftDTO shiftDTO )
+    public async Task CreateShift([FromBody] ShiftDTO shiftDTO)
     {
         Shift shift = new Shift()
         {
@@ -29,7 +29,7 @@ public class ShiftController : ControllerBase
             Description = shiftDTO.Description,
             Location = shiftDTO.Location,
             RequestedEmployees = shiftDTO.RequestedEmployees,
-            Status = shiftDTO.Status,
+            Status = Shift.STATUS_ACTIVE,
         };
 
         await _shiftService.CreateShift(shift);
