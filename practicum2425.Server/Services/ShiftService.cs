@@ -31,6 +31,12 @@ public class ShiftService : IShiftService
         await _context.SaveChangesAsync();
     }
 
+    public async Task EditShift(Shift shift)
+    {
+        _context.Shifts.Update(shift);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<List<Shift>> GetAllShifts()
     {
         return await _context.Shifts.ToListAsync();

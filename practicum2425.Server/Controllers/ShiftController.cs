@@ -34,4 +34,10 @@ public class ShiftController : ControllerBase
 
         await _shiftService.CreateShift(shift);
     }
+
+    [HttpPut("Edit/{id}")]
+    public async Task EditShift([FromBody] Shift shift, int id)
+    {
+        await _shiftService.EditShift(shift);
+    }
 }

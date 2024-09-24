@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ProjectDTO } from "../DataDTOInterfaces/ProjectDTOInterface"
-import { Post } from "../Functions/Post"
+import { httpRequest } from "../Functions/Post"
 
 function ProjectForm() {
     const [title, setTitle] = useState<string>("")
@@ -17,7 +17,7 @@ function ProjectForm() {
             endDate: endDate,
         }
 
-        Post(import.meta.env.VITE_API_URL + 'api/Project', project)
+        httpRequest(import.meta.env.VITE_API_URL + 'api/Project', project, "POST")
     }
 
     return (
