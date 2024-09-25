@@ -8,8 +8,23 @@ function ShiftForm() {
     const [description, setDescription] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [requestedEmployees, setRequestedEmployees] = useState<number>(0)
+    const [formErrorList, setFormErrorList] = useState<string[]>('');
+    const [isValidForm, setIsValidForm] = useState<boolean>(true)
+
+    const validateAllInput = () => {
+        const formArray = formErrorList;
+
+        if(requestedEmployees < 1) {setFormErrorList(...formArray, "Requested Officers Must be Greater than 0"); setIsValidForm(false)}
+        else if(endTime < startTime || endTime == startTime) {setFormError("End Time has to be after Start Time"); setIsValidForm(false)}
+        else if(!description) {setFormError("Please add a description"); setIsValidForm(false)}
+        else if(!location) {setFormError("Please add a location"); setIsValidForm(false)}
+        else {setFormError(''); setIsValidForm(false)}
+    }
 
     async function postShift() {
+        validateAllInput()
+        if(isValidForm)
+        {
         const shift: ShiftDTO = {
             StartTime: startTime,
             EndTime: endTime,
@@ -18,9 +33,12 @@ function ShiftForm() {
             RequestedEmployees: requestedEmployees,
             Status: "ACTIVE"
         }
-
+        setFormError("Successful submission")
         httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/create', shift, "POST")
     }
+    }
+
+
 
     return (
         <form>
@@ -101,6 +119,7 @@ function ShiftForm() {
             <button className="btn btn-primary" type="button" onClick={() => { postShift() } }>
                 Create Project
             </button>
+            <div>{formError}</div>
         </form>
     );
 }
