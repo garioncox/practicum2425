@@ -8,34 +8,56 @@ function ShiftForm() {
     const [description, setDescription] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [requestedEmployees, setRequestedEmployees] = useState<number>(0)
-    const [formErrorList, setFormErrorList] = useState<string[]>('');
-    const [isValidForm, setIsValidForm] = useState<boolean>(true)
+    const [formErrorList, setFormErrorList] = useState<string[]>(['']);
+    const [isValidForm, setIsValidForm] = useState<boolean>(false)
 
     const validateAllInput = () => {
-        const formArray = formErrorList;
+        const formArray = []; 
 
-        if(requestedEmployees < 1) {setFormErrorList(...formArray, "Requested Officers Must be Greater than 0"); setIsValidForm(false)}
-        else if(endTime < startTime || endTime == startTime) {setFormError("End Time has to be after Start Time"); setIsValidForm(false)}
-        else if(!description) {setFormError("Please add a description"); setIsValidForm(false)}
-        else if(!location) {setFormError("Please add a location"); setIsValidForm(false)}
-        else {setFormError(''); setIsValidForm(false)}
+        let isValid = true;
+        
+        // Check each condition and accumulate errors
+        if (requestedEmployees < 1) {
+          formArray.push("Requested Officers Must be Greater than 0");
+          isValid = false;
+        }
+        if (endTime <= startTime) { // Use <= to check for both cases
+          formArray.push("End Time has to be after Start Time");
+          isValid = false;
+        }
+        if (!description) {
+          formArray.push("Please add a description");
+          isValid = false;
+        }
+        if (!location) {
+          formArray.push("Please add a location");
+          isValid = false;
+        }
+        
+        // Update the state only once with the accumulated errors
+        setFormErrorList(formArray);
+        
+        // If valid, clear the error list
+        if (isValid) {
+          setFormErrorList([]);
+        }
+        
+        return isValid;
     }
 
     async function postShift() {
-        validateAllInput()
-        if(isValidForm)
-        {
-        const shift: ShiftDTO = {
-            StartTime: startTime,
-            EndTime: endTime,
-            Description: description,
-            Location: location,
-            RequestedEmployees: requestedEmployees,
-            Status: "ACTIVE"
+        if (validateAllInput()) {
+            const shift: ShiftDTO = {
+                StartTime: startTime,
+                EndTime: endTime,
+                Description: description,
+                Location: location,
+                RequestedEmployees: requestedEmployees,
+                Status: "ACTIVE"
+            }
+            setFormErrorList(["Shift Added Successfully"])
+            httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/create', shift, "POST")
         }
-        setFormError("Successful submission")
-        httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/create', shift, "POST")
-    }
     }
 
 
@@ -48,7 +70,7 @@ function ShiftForm() {
                     <label htmlFor="title">Location</label>
                     <input
                         value={location}
-                        onChange={(e) => { setLocation(e.target.value)} }
+                        onChange={(e) => { setLocation(e.target.value) }}
                         type="text"
                         className="form-control"
                         id="title"
@@ -116,11 +138,14 @@ function ShiftForm() {
                     />
                 </div>
             </div>
-            <button className="btn btn-primary" type="button" onClick={() => { postShift() } }>
+            <button className="btn btn-primary" type="button" onClick={() => { postShift() }}>
                 Create Project
             </button>
-            <div>{formError}</div>
-        </form>
+            <div>
+                {formErrorList.map((error) => (
+                    <div>{error}</div>
+                ))}
+            </div>        </form>
     );
 }
 
