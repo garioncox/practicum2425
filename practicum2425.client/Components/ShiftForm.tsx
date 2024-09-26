@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ShiftDTO } from "../DataDTOInterfaces/ShiftDTOInterface";
-import { httpRequest } from "../Functions/Post";
+import { httpRequest } from "../Functions/HttpRequest";
 
 function ShiftForm() {
     const [startTime, setStartTime] = useState<string>("");

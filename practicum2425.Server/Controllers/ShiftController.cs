@@ -47,9 +47,15 @@ public class ShiftController : ControllerBase
         await _shiftService.ArchiveShiftAsync(shiftId);
     }
 
-    [HttpPut("Edit/{id}")]
+    [HttpPut("edit/{id}")]
     public async Task EditShift([FromBody] Shift shift, int id)
     {
-        await _shiftService.EditShift(shift);
+        await _shiftService.EditShiftAsync(shift);
+    }
+
+    [HttpDelete("delete/{id}" )]
+    public async Task Delete(int id)
+    {
+        await _shiftService.DeleteShiftAsync(id);
     }
 }
