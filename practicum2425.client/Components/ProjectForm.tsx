@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ProjectDTO } from "../DataDTOInterfaces/ProjectDTOInterface";
-import { httpRequest } from "../Functions/Post";
+import { httpRequest } from "../Functions/HttpRequest";
 
 function ProjectForm() {
     const [title, setTitle] = useState<string>("");

@@ -32,7 +32,7 @@ public class ShiftService : IShiftService
         await _context.SaveChangesAsync();
     }
 
-    public async Task EditShift(Shift shift)
+    public async Task EditShiftAsync(Shift shift)
     {
         _context.Shifts.Update(shift);
         await _context.SaveChangesAsync();
@@ -57,5 +57,15 @@ public class ShiftService : IShiftService
         return await _context.Shifts
             .Where(s => s.Id == id)
             .FirstOrDefaultAsync();
+    }
+
+    public Task DeleteShiftAsync(int shiftId)
+    {
+        Shift? shift = _context.Shifts.FirstOrDefault(s => s.Id == shiftId);
+        if (shift != null)
+        {
+            _context.Shifts.Remove(shift);
+        }
+        return _context.SaveChangesAsync();
     }
 }

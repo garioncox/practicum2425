@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
-import { httpRequest } from "../Functions/Post"
 import { EmployeeShiftDTO } from '../DataDTOInterfaces/EmployeeShiftDTOInterface'
 import Spinner from './Spinner'
+import { httpRequest } from '../Functions/HttpRequest';
 
 
 function ViewShiftOfficer() {

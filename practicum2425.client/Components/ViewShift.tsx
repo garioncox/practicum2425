@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
 import Spinner from './Spinner'
-import { httpRequest } from '../Functions/Post';
+import { httpDelete, httpRequest } from '../Functions/HttpRequest';
 
 function ViewShift() {
     const [selected, setSelected] = useState<number>()
@@ -61,7 +61,7 @@ function ViewShift() {
             status: shift!.status,
         }
 
-        httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/Edit/' + String(newShift.id), newShift, "PUT")
+        httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/edit/' + String(newShift.id), newShift, "PUT")
         setSelected(-1)
     }
 
@@ -86,7 +86,7 @@ function ViewShift() {
                 <td>{s.requestedEmployees}</td>
                 <td>{s.status} </td>
                 <td> <button onClick={() => handleEdit(s.id)} className="btn btn-warning"> Edit </button> </td>
-                <td> <button className="btn btn-danger" disabled> Delete </button> </td>
+                    <td> <button onClick={() => handleDelete(s.id)} className="btn btn-danger"> Delete </button> </td>
             </tr>
         )
         return val
@@ -133,3 +133,8 @@ function ViewShift() {
 }
 
 export default ViewShift
+
+function handleDelete(id: number): void {
+    httpDelete(import.meta.env.VITE_API_URL + 'api/Shift/delete/' + String(id))
+
+}
