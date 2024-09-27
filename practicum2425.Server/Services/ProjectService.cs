@@ -23,5 +23,21 @@ public class ProjectService : IProjectService
         _context.Projects.Add(project);
         await _context.SaveChangesAsync();
     }
+
+    public Task DeleteProjectAsync(int id)
+    {
+        Project? project = _context.Projects.FirstOrDefault(p => p.Id == id);
+        if (project != null)
+        {
+            _context.Projects.Remove(project);
+        }
+        return _context.SaveChangesAsync();
+    }
+
+    public async Task EditProjectAsync(Project project)
+    {
+        _context.Projects.Update(project);
+        await _context.SaveChangesAsync();
+    }
 }
 
