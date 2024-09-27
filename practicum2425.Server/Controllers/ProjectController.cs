@@ -35,4 +35,16 @@ public class ProjectController : ControllerBase
 
         await _projectService.CreateProject(project);
     }
+
+    [HttpPut("edit/{id}")]
+    public async Task EditProject( [FromBody] Project project, int id)
+    {
+        await _projectService.EditProjectAsync(project);
+    }
+
+    [HttpDelete("delete/{id}")]
+    public async Task DeleteProject(int id)
+    {
+        await _projectService.DeleteProjectAsync(id);
+    }
 }
