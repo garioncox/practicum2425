@@ -1,14 +1,16 @@
 //import React from 'react'
-import { Employee } from "../DataInterface/EmployeeInterface" 
+import { Employee } from "../DataInterface/EmployeeInterface"
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
+import { useNavigate } from 'react-router-dom';
+import "../src/index.css"
 
 function ViewEmployees() {
     const [employees, setEmployees] = useState<Employee[]>([])
 
-    useEffect(() => { 
+    useEffect(() => {
         getEmployees()
-    },[])
+    }, [])
 
     async function getEmployees() {
         const response = await fetch(import.meta.env.VITE_API_URL + 'api/Employee/GetEmployees');
@@ -17,32 +19,43 @@ function ViewEmployees() {
         setEmployees(value)
     }
 
+    const navigate = useNavigate();
+
     const contents =
         employees === undefined ? (
             <Spinner />
         ) : (
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {employees.map((s) => (
-                        <tr key={s.id }>
-                            <td>{s.name}</td>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th className="text-start">Name</th>
+                            <th className="text-start">Phone Number</th>
+                            <th className="text-start">Email</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {employees.map((e) => (
+                            <tr
+                                key={e.id}
+                                className="grow grow:hover"
+                                onClick={() => navigate(`/admin/view/employees/${e.id}`)}
+                                style={{ cursor: 'pointer' }} // Optional: adds a pointer cursor
+                            >
+                                <td className="text-start">{e.name}</td>
+                                <td className="text-start">{e.phonenumber}</td>
+                                <td className="text-start">{e.email}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
         );
 
     return (
         <>
-            {contents }
+            <h1>Admin Employee View</h1>
+            {contents}
         </>
-        
+
     )
 }
 

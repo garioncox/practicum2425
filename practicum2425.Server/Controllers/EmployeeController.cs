@@ -19,4 +19,10 @@ public class EmployeeController : Controller
     {
         return await _EmployeeService.GetEmployeesListAsync();
     }
+
+    [HttpGet("GetEmployees/{id}")]
+    public async Task<Employee> GetEmployeeById( int id)
+    {
+        return await _EmployeeService.GetEmployeeByIdAsync(id);
+    }
 }
