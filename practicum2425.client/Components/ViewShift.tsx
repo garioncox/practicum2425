@@ -2,16 +2,15 @@ import { useState, useEffect } from 'react';
 import { Shift } from '../DataInterface/ShiftInterface'
 import Spinner from './Spinner'
 import { httpDelete, httpRequest } from '../Functions/HttpRequest';
+import { ok } from 'assert';
 
 function ViewShift() {
     const [selected, setSelected] = useState<number>()
-
     const [selectLocation, setLocation] = useState<string>("")
     const [selectStartTime, setStartTime] = useState<string>("")
     const [selectEndTime, setEndTime] = useState<string>("")
     const [selectDescription, setDescription] = useState<string>("")
     const [selectReqEmployees, setReqEmployees] = useState<number>(-1)
-
     const [shifts, setShifts] = useState<Shift[]>()
 
     useEffect(() => {
@@ -32,25 +31,43 @@ function ViewShift() {
         setDescription(shift.description)
     }, [selected])
 
+
+    async function populateShifts() {
+        const r1 = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get/archived');
+        const archived = await r1.json();
+
+        const r2 = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get');
+        const active = await r2.json();
+
+        setShifts([...archived, ...active]);
+    }
+
+
     function handleEdit(id: number) {
         setSelected(id)
     }
+    
+    function handleArchive(shift: Shift) {
 
-    function findShift() {
-        if (shifts === undefined) {
-            return
-        }
-        for (let i = 0; i < shifts.length; i++) {
-            if (shifts[i].id === selected) {
-                return shifts[i]
-            }
+        shift.status="ARCHIVED"
 
-        }
+        httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/edit/' + String(shift.id), shift, "PUT")
     }
 
-    function saveEdit() {
-        const shift = findShift()
 
+    async function handleArchive(shift: Shift) {
+        shift.status = "ARCHIVED"
+
+        httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/edit/' + String(shift.id), shift, "PUT")
+
+        setShifts(prevShifts =>
+            prevShifts?.map(s => (s.id === shift.id ? shift : s)))
+    }
+
+    async function saveEdit() {
+
+        const shift = findShift()
+    
         const newShift: Shift = {
             location: selectLocation,
             id: shift!.id,
@@ -60,9 +77,28 @@ function ViewShift() {
             requestedEmployees: selectReqEmployees,
             status: shift!.status,
         }
-
+    
         httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/edit/' + String(newShift.id), newShift, "PUT")
-        setSelected(-1)
+        handleEdit(-1)
+
+        setShifts(prevShifts =>
+            prevShifts?.map(s => (s.id === newShift.id ? newShift : s)))
+    }
+
+    function handleDelete(id: number): void {
+        httpDelete(import.meta.env.VITE_API_URL + 'api/Shift/delete/' + String(id))
+    }
+    
+    function findShift() {
+        if (shifts === undefined) {
+            return
+        }
+        for (let i = 0; i < shifts.length; i++) {
+            if (shifts[i].id === selected) {
+                return shifts[i]
+            }
+    
+        }
     }
 
     function checkSelected(s: Shift) {
@@ -86,7 +122,8 @@ function ViewShift() {
                 <td>{s.requestedEmployees}</td>
                 <td>{s.status} </td>
                 <td> <button onClick={() => handleEdit(s.id)} className="btn btn-warning"> Edit </button> </td>
-                    <td> <button onClick={() => handleDelete(s.id)} className="btn btn-danger"> Delete </button> </td>
+                <td> <button onClick={() => handleArchive(s)} className="btn btn-danger"> Delete </button> </td>
+
             </tr>
         )
         return val
@@ -113,16 +150,6 @@ function ViewShift() {
             </table>
         );
 
-    async function populateShifts() {
-        const r1 = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get/archived');
-        const archived = await r1.json();
-
-        const r2 = await fetch(import.meta.env.VITE_API_URL + 'api/Shift/get');
-        const active = await r2.json();
-
-        setShifts([...archived, ...active]);
-    }
-
     return (
         <div >
             <h1 id="shifts"> Shift List</h1>
@@ -131,10 +158,5 @@ function ViewShift() {
         </div>
     )
 }
-
 export default ViewShift
 
-function handleDelete(id: number): void {
-    httpDelete(import.meta.env.VITE_API_URL + 'api/Shift/delete/' + String(id))
-
-}
