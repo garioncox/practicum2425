@@ -76,10 +76,15 @@ public partial class PostgresContext : DbContext
             entity.ToTable("employee", "practicum2425");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Email)
+                .HasMaxLength(30)
+                .HasColumnName("email");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
-            entity.Property(e => e.PayRate).HasColumnName("pay_rate");
+            entity.Property(e => e.Phonenumber)
+                .HasMaxLength(13)
+                .HasColumnName("phonenumber");
         });
 
         modelBuilder.Entity<EmployeeShift>(entity =>
