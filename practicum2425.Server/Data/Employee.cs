@@ -9,7 +9,9 @@ public partial class Employee
 
     public string Name { get; set; } = null!;
 
-    public decimal? PayRate { get; set; }
+    public string? Email { get; set; }
+
+    public string? Phonenumber { get; set; }
 
     public virtual ICollection<EmployeeShift> EmployeeShifts { get; set; } = new List<EmployeeShift>();
 }
