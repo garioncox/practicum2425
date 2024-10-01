@@ -32,25 +32,24 @@ function ViewShift() {
         setDescription(shift.description)
     }, [selected])
 
+    function handleDelete(id: number): void {
+        httpDelete(import.meta.env.VITE_API_URL + 'api/Shift/delete/' + String(id))
+    }
+    
     function handleEdit(id: number) {
         setSelected(id)
     }
+    
+    function handleArchive(shift: Shift) {
 
-    function findShift() {
-        if (shifts === undefined) {
-            return
-        }
-        for (let i = 0; i < shifts.length; i++) {
-            if (shifts[i].id === selected) {
-                return shifts[i]
-            }
+        shift.status="ARCHIVED"
 
-        }
+        httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/edit/' + String(shift.id), shift, "PUT")
     }
-
+    
     function saveEdit() {
         const shift = findShift()
-
+    
         const newShift: Shift = {
             location: selectLocation,
             id: shift!.id,
@@ -60,9 +59,21 @@ function ViewShift() {
             requestedEmployees: selectReqEmployees,
             status: shift!.status,
         }
-
+    
         httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/edit/' + String(newShift.id), newShift, "PUT")
         setSelected(-1)
+    }
+    
+    function findShift() {
+        if (shifts === undefined) {
+            return
+        }
+        for (let i = 0; i < shifts.length; i++) {
+            if (shifts[i].id === selected) {
+                return shifts[i]
+            }
+    
+        }
     }
 
     function checkSelected(s: Shift) {
@@ -86,7 +97,7 @@ function ViewShift() {
                 <td>{s.requestedEmployees}</td>
                 <td>{s.status} </td>
                 <td> <button onClick={() => handleEdit(s.id)} className="btn btn-warning"> Edit </button> </td>
-                    <td> <button onClick={() => handleDelete(s.id)} className="btn btn-danger"> Delete </button> </td>
+                    <td> <button onClick={() => handleArchive(s)} className="btn btn-danger"> Archive </button> </td>
             </tr>
         )
         return val
@@ -134,7 +145,4 @@ function ViewShift() {
 
 export default ViewShift
 
-function handleDelete(id: number): void {
-    httpDelete(import.meta.env.VITE_API_URL + 'api/Shift/delete/' + String(id))
 
-}
