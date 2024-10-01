@@ -12,6 +12,11 @@ public class EmployeeService : IEmployeeService
         _context = context;
     }
 
+    public async Task<List<Employee>> GetEmployeesListAsync()
+    {
+        return await _context.Employees.ToListAsync();
+    }
+
     public async Task ResignFromShift(int shift_id)
     {
         EmployeeShift? shift = await _context.EmployeeShifts

@@ -5,6 +5,8 @@ import ViewShift from '../Components/ViewShift'
 import ViewShiftOfficer from '../Components/ViewShiftOfficer'
 import ShiftForm from '../Components/ShiftForm'
 import ProjectForm from '../Components/ProjectForm'
+import ViewEmployees from '../Components/ViewEmployees'
+
 
 function App() {
 
@@ -16,6 +18,7 @@ function App() {
             <Route path="project/view" element={<ViewProject />} />
             <Route path="shift/create" element={<ShiftForm />} />
             <Route path="project/create" element={<ProjectForm />} />
+            <Route path="admin/view/employees" element={<ViewEmployees />} />
         </Routes>
     );
 }

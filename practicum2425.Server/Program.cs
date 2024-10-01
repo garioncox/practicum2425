@@ -27,6 +27,7 @@ builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IShiftService, ShiftService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IEmployeeShiftService, EmployeeShiftService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 
 var app = builder.Build();

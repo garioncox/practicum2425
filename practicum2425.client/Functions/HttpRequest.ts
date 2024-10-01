@@ -19,7 +19,7 @@ export const httpRequest = async (urlString: string, upload:any, type: string) =
     }
 }
 
-export const httpDelete = async (urlString) => {
+export const httpDelete = async (urlString : string) => {
     try {
         const myHeaders = new Headers();
         myHeaders.append("accept", "application/json");
