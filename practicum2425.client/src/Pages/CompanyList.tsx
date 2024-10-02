@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Company } from '../DataInterface/CompanyInterface';
-import Spinner from './Spinner'
-import * as React from 'react';
+import { Company } from '../Data/Interfaces/Company';
 
-function ViewProject() {
+function CompanyList() {
     const [companies, setCompanies] = useState<Company[]>();
 
     useEffect(() => {
@@ -16,7 +14,8 @@ function ViewProject() {
         setCompanies(data);
     }
 
-    const contents = companies === undefined ? <Spinner /> :
+    const contents = companies === undefined ? <div className="spinner-border" role="status" />
+    :
         (
             <div>
                 {companies.map(c =>
@@ -35,4 +34,4 @@ function ViewProject() {
 
 };
 
-export default ViewProject
+export default CompanyList
