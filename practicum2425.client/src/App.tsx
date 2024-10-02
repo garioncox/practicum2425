@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import Home from '../Components/Home'
-import ViewProject from '../Components/ViewProject'
-import ViewShift from '../Components/ViewShift'
-import ViewShiftOfficer from '../Components/ViewShiftOfficer'
-import ShiftForm from '../Components/ShiftForm'
-import ProjectForm from '../Components/ProjectForm'
-import ViewEmployees from '../Components/ViewEmployees'
-import EmployeeDetails from '../Components/EmployeeDetails'
+import CreateShift from "./Pages/CreateShift";
+import Home from "./Pages/Home";
+import ProjectList from "./Pages/ProjectList";
+import ShiftList from "./Pages/ShiftList";
+import ShiftOfficerList from "./Pages/ShiftOfficerList";
+import CreateProject from "./Pages/CreateProject";
+import EmployeeDetails from "./Pages/EmployeeDetails";
+import ViewEmployees from "./Pages/ViewEmployees";
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
             <Route path="shift/view/officer" element={<ShiftOfficerList />} />
             <Route path="project/view" element={<ProjectList />} />
             <Route path="shift/create" element={<CreateShift />} />
-            <Route path="project/create" element={<ProjectForm />} />
+            <Route path="project/create" element={<CreateProject />} />
             <Route path="admin/view/employees" element={<ViewEmployees />} />
             <Route path="admin/view/employees/:id" element={<EmployeeDetails />} />
         </Routes>

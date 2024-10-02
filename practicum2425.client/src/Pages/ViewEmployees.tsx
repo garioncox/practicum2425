@@ -1,9 +1,8 @@
-import { Employee } from "../DataInterface/EmployeeInterface"
 import { useEffect, useState } from "react";
-import Spinner from "./Spinner";
 import { useNavigate } from 'react-router-dom';
-import AddOfficer  from '../Components/AddOfficer'
-import "../src/index.css"
+import "../index.css"
+import { Employee } from "../Data/Interfaces/EmployeeInterface";
+import AddOfficer from "./AddOfficer";
 
 function ViewEmployees() {
     const [employees, setEmployees] = useState<Employee[]>([])
@@ -23,7 +22,7 @@ function ViewEmployees() {
 
     const contents =
         employees === undefined ? (
-            <Spinner />
+            <div className="spinner-border" role="status" />
         ) : (
                 <table className="table table-striped">
                     <thead>
