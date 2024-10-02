@@ -3,6 +3,7 @@ import { Employee } from "../DataInterface/EmployeeInterface"
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 import { useNavigate } from 'react-router-dom';
+import AddOfficer  from '../Components/AddOfficer'
 import "../src/index.css"
 
 function ViewEmployees() {
@@ -39,7 +40,6 @@ function ViewEmployees() {
                                 key={e.id}
                                 className="grow grow:hover"
                                 onClick={() => navigate(`/admin/view/employees/${e.id}`)}
-                                style={{ cursor: 'pointer' }} // Optional: adds a pointer cursor
                             >
                                 <td className="text-start">{e.name}</td>
                                 <td className="text-start">{e.phonenumber}</td>
@@ -52,6 +52,7 @@ function ViewEmployees() {
 
     return (
         <>
+            <AddOfficer />
             <h1>Admin Employee View</h1>
             {contents}
         </>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using practicum2425.Server.Data;
+using practicum2425.Server.DTOs;
 using practicum2425.Server.Interfaces;
 
 namespace practicum2425.Server.Controllers;
@@ -24,5 +25,17 @@ public class EmployeeController : Controller
     public async Task<Employee> GetEmployeeById( int id)
     {
         return await _EmployeeService.GetEmployeeByIdAsync(id);
+    }
+
+    [HttpPost("PostEmployee/")]
+    public async Task PostEmployee([FromBody] EmployeeDTO employeeDTO)
+    {
+        Employee employee = new Employee()
+        {
+            Phonenumber = employeeDTO.Phonenumber,
+            Email = employeeDTO.Email,
+            Name = employeeDTO.Name
+        };
+        await _EmployeeService.PostEmployee(employee);
     }
 }

@@ -23,7 +23,11 @@ public class EmployeeService : IEmployeeService
         return await _context.Employees.ToListAsync();
     }
 
-
+    public async Task PostEmployee(Employee employee)
+    {
+        _context.Employees.Add(employee);
+        await _context.SaveChangesAsync();
+    }
 
     public async Task ResignFromShift(int shift_id)
     {
