@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Shift } from '../DataInterface/ShiftInterface'
-import { EmployeeShiftDTO } from '../DataDTOInterfaces/EmployeeShiftDTOInterface'
-import Spinner from './Spinner'
+import { Shift } from '../Data/Interfaces/Shift'
+import { EmployeeShiftDTO } from '../Data/DTOInterfaces/EmployeeShiftDTO'
 import { httpRequest } from '../Functions/HttpRequest';
 
 
-function ViewShiftOfficer() {
+function ShiftOfficerList() {
     const [shifts, setShifts] = useState<Shift[]>()
 
     useEffect(() => {
@@ -14,7 +13,7 @@ function ViewShiftOfficer() {
 
     const contents =
         shifts === undefined ? (
-            <Spinner />
+            <div className="spinner-border" role="status" />
         ) : (
             <table className="table table-striped">
                 <thead>
@@ -64,4 +63,4 @@ function ViewShiftOfficer() {
 
 }
 
-export default ViewShiftOfficer
+export default ShiftOfficerList

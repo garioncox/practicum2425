@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Project } from '../DataInterface/ProjectInterface';
-import Spinner from './Spinner';
+import { Project } from '../Data/Interfaces/Project';
 import { httpDelete, httpRequest } from '../Functions/HttpRequest';
 
-function ViewProject() {
+function ProjectList() {
     const [projects, setProjects] = useState<Project[]>()
     const [name, setName] = useState<string>("")
     const [location, setLocation] = useState<string>("")
@@ -105,7 +104,7 @@ function ViewProject() {
 
     const contents =
         projects === undefined ? (
-            <Spinner />
+            <div className="spinner-border" role="status" />
         ) : (
             <table className="table table-striped">
                 <thead>
@@ -131,7 +130,7 @@ function ViewProject() {
         </div>
     )
 };
-export default ViewProject
+export default ProjectList
 
 function setupEdit() {
     throw new Error('Function not implemented.');
