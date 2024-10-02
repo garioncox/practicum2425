@@ -1,4 +1,3 @@
-//import React from 'react'
 import { Employee } from "../DataInterface/EmployeeInterface"
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
