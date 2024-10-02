@@ -47,13 +47,6 @@ function ViewShift() {
         setSelected(id)
     }
     
-    function handleArchive(shift: Shift) {
-
-        shift.status="ARCHIVED"
-
-        httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/edit/' + String(shift.id), shift, "PUT")
-    }
-
 
     async function handleArchive(shift: Shift) {
         shift.status = "ARCHIVED"
