@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using practicum2425.Server.Controllers;
 using practicum2425.Server.Data;
 using practicum2425.Server.Interfaces;
 using practicum2425.Server.Services;
@@ -16,6 +17,8 @@ builder.Services.AddCors(options =>
                .AllowAnyHeader();
     });
 });
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

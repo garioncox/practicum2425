@@ -13,10 +13,10 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="shift/view" element={<ViewShift />} />
-            <Route path="shift/view/officer" element={<ViewShiftOfficer />} />
-            <Route path="project/view" element={<ViewProject />} />
-            <Route path="shift/create" element={<ShiftForm />} />
+            <Route path="shift/view" element={<ShiftList />} />
+            <Route path="shift/view/officer" element={<ShiftOfficerList />} />
+            <Route path="project/view" element={<ProjectList />} />
+            <Route path="shift/create" element={<CreateShift />} />
             <Route path="project/create" element={<ProjectForm />} />
             <Route path="admin/view/employees" element={<ViewEmployees />} />
             <Route path="admin/view/employees/:id" element={<EmployeeDetails />} />

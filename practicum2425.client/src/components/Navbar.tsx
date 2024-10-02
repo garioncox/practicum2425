@@ -1,6 +1,6 @@
 import { Auth0Provider } from "@auth0/auth0-react";
-import LoginButton from "../src/components/login";
-import LogoutButton from "../src/components/logout";
+import LoginButton from "./login";
+import LogoutButton from "./logout";
 import { Link } from "react-router-dom";
 
 function Navbar() {

@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
 import App from './App.tsx'
-import Navbar from '../Components/Navbar.tsx'
+import Navbar from './Components/Navbar.tsx'
 import './index.css'
-import Sidebar from './components/Sidebar.tsx'
+import Sidebar from './Components/Sidebar.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 

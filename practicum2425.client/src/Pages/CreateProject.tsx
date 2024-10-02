@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ProjectDTO } from "../DataDTOInterfaces/ProjectDTOInterface";
+import { ProjectDTO } from "../Data/DTOInterfaces/ProjectDTO";
 import { httpRequest } from "../Functions/HttpRequest";
 
-function ProjectForm() {
+function CreateProject() {
     const [title, setTitle] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
@@ -125,4 +125,4 @@ function ProjectForm() {
     );
 }
 
-export default ProjectForm;
+export default CreateProject;
