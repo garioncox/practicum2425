@@ -12,6 +12,23 @@ public class EmployeeService : IEmployeeService
         _context = context;
     }
 
+    public async Task<Employee> GetEmployeeByIdAsync(int id)
+    {
+        Employee? employee = await _context.Employees.Where(e => e.Id == id).FirstOrDefaultAsync();
+        return employee;
+    }
+
+    public async Task<List<Employee>> GetEmployeesListAsync()
+    {
+        return await _context.Employees.ToListAsync();
+    }
+
+    public async Task PostEmployee(Employee employee)
+    {
+        _context.Employees.Add(employee);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task ResignFromShift(int shift_id)
     {
         EmployeeShift? shift = await _context.EmployeeShifts

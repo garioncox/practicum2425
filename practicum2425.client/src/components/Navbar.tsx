@@ -49,6 +49,11 @@ function Navbar() {
                                     Create Shift
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/admin/view/employees">
+                                    View Employees
+                                </Link>
+                            </li>
                         </ul>
 
                         <Auth0Provider
