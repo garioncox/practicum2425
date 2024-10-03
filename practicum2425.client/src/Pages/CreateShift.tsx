@@ -4,7 +4,6 @@ import { httpRequest } from "../Functions/HttpRequest";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function CreateShift() {
     const [startTime, setStartTime] = useState<string>("");
     const [endTime, setEndTime] = useState<string>("");
@@ -18,17 +17,32 @@ function CreateShift() {
         description?: string;
         requestedEmployees?: string;
     }>({});
+    const [submitted, setSubmitted] = useState<boolean>(false);
 
     const validateAllInput = () => {
         const errors: { [key: string]: string } = {};
         let isValid = true;
 
-        if (requestedEmployees < 1) {
-            errors.requestedEmployees = "Requested Officers Must be Greater than 0";
+        const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+
+        if (!startTime) {
+            errors.startTime = "Start time is required";
+            isValid = false;
+        } else if (startTime < today) {
+            errors.startTime = "Start time cannot be in the past";
             isValid = false;
         }
-        if (endTime <= startTime) {
-            errors.endTime = "End Time has to be after Start Time";
+
+        if (!endTime) {
+            errors.endTime = "End time is required";
+            isValid = false;
+        } else if (endTime <= startTime) {
+            errors.endTime = "End time must be after start time";
+            isValid = false;
+        }
+
+        if (requestedEmployees < 1) {
+            errors.requestedEmployees = "Requested Officers must be greater than 0";
             isValid = false;
         }
         if (!description) {
@@ -45,6 +59,7 @@ function CreateShift() {
     };
 
     async function postShift() {
+        setSubmitted(true); // Used for validation
         if (validateAllInput()) {
             const shift: ShiftDTO = {
                 StartTime: startTime,
@@ -82,75 +97,99 @@ function CreateShift() {
                     <label htmlFor="location">Location</label>
                     <input
                         value={location}
-                        onChange={(e) => setLocation(e.target.value)}
+                        onChange={(e) => {
+                            setLocation(e.target.value);
+                            if (submitted && e.target.value) {
+                                setFormErrors((prev) => ({ ...prev, location: "" })); // Clear error on input
+                            }
+                        }}
                         type="text"
-                        className={`form-control ${formErrors.location ? "is-invalid" : ""}`}
+                        className={`form-control ${submitted && formErrors.location ? "is-invalid" : location && !formErrors.location && submitted ? "is-valid" : ""}`}
                         id="location"
                         placeholder="North Side"
                         required
                     />
-                    {formErrors.location && <div className="invalid-feedback">{formErrors.location}</div>}
+                    {submitted && formErrors.location && <div className="invalid-feedback">{formErrors.location}</div>}
                 </div>
                 <div className="col-md-2 mb-3">
                     <label htmlFor="startTime">Start</label>
                     <input
                         value={startTime}
-                        onChange={(e) => setStartTime(e.target.value)}
+                        onChange={(e) => {
+                            setStartTime(e.target.value);
+                            if (submitted && e.target.value) {
+                                setFormErrors((prev) => ({ ...prev, startTime: "" })); // Clear error on input
+                            }
+                        }}
                         type="date"
-                        className={`form-control ${formErrors.startTime ? "is-invalid" : ""}`}
+                        className={`form-control ${submitted && formErrors.startTime ? "is-invalid" : startTime && !formErrors.startTime && submitted ? "is-valid" : ""}`}
                         id="startTime"
                         required
                     />
-                    {formErrors.startTime && <div className="invalid-feedback">{formErrors.startTime}</div>}
+                    {submitted && formErrors.startTime && <div className="invalid-feedback">{formErrors.startTime}</div>}
                 </div>
                 <div className="col-md-2 mb-3">
                     <label htmlFor="endTime">End</label>
                     <input
                         value={endTime}
-                        onChange={(e) => setEndTime(e.target.value)}
+                        onChange={(e) => {
+                            setEndTime(e.target.value);
+                            if (submitted && e.target.value) {
+                                setFormErrors((prev) => ({ ...prev, endTime: "" })); // Clear error on input
+                            }
+                        }}
                         type="date"
-                        className={`form-control ${formErrors.endTime ? "is-invalid" : ""}`}
+                        className={`form-control ${submitted && formErrors.endTime ? "is-invalid" : endTime && !formErrors.endTime && submitted ? "is-valid" : ""}`}
                         id="endTime"
                         required
                     />
-                    {formErrors.endTime && <div className="invalid-feedback">{formErrors.endTime}</div>}
+                    {submitted && formErrors.endTime && <div className="invalid-feedback">{formErrors.endTime}</div>}
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-12 mb-3">
-                    <label htmlFor="description">Description</label>
-                    <input
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        type="text"
-                        className={`form-control ${formErrors.description ? "is-invalid" : ""}`}
-                        id="description"
-                        placeholder="Traffic Control"
-                        required
-                    />
-                    {formErrors.description && <div className="invalid-feedback">{formErrors.description}</div>}
+                <div className="row">
+                    <div className="col-12 mb-3">
+                        <label htmlFor="description">Description</label>
+                        <input
+                            value={description}
+                            onChange={(e) => {
+                                setDescription(e.target.value);
+                                if (submitted && e.target.value) {
+                                    setFormErrors((prev) => ({ ...prev, description: "" })); // Clear error on input
+                                }
+                            }}
+                            type="text"
+                            className={`form-control ${submitted && formErrors.description ? "is-invalid" : description && !formErrors.description && submitted ? "is-valid" : ""}`}
+                            id="description"
+                            placeholder="Traffic Control"
+                            required
+                        />
+                        {submitted && formErrors.description && <div className="invalid-feedback">{formErrors.description}</div>}
+                    </div>
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-md-8 mb-3">
-                    <label htmlFor="requestedEmployees">Requested Number of Officers</label>
-                    <input
-                        value={requestedEmployees}
-                        onChange={(e) => setRequestedEmployees(Number(e.target.value))}
-                        type="number"
-                        className={`form-control ${formErrors.requestedEmployees ? "is-invalid" : ""}`}
-                        id="requestedEmployees"
-                        placeholder="0"
-                        required
-                    />
-                    {formErrors.requestedEmployees && <div className="invalid-feedback">{formErrors.requestedEmployees}</div>}
+                <div className="row">
+                    <div className="col-md-8 mb-3">
+                        <label htmlFor="requestedEmployees">Requested Number of Officers</label>
+                        <input
+                            value={requestedEmployees}
+                            onChange={(e) => {
+                                setRequestedEmployees(Number(e.target.value));
+                                if (submitted && e.target.value) {
+                                    setFormErrors((prev) => ({ ...prev, requestedEmployees: "" })); // Clear error on input
+                                }
+                            }}
+                            type="number"
+                            className={`form-control ${submitted && formErrors.requestedEmployees ? "is-invalid" : requestedEmployees && !formErrors.requestedEmployees && submitted ? "is-valid" : ""}`}
+                            id="requestedEmployees"
+                            placeholder="0"
+                            required
+                        />
+                        {submitted && formErrors.requestedEmployees && <div className="invalid-feedback">{formErrors.requestedEmployees}</div>}
+                    </div>
                 </div>
             </div>
             <button className="btn btn-primary" type="button" onClick={postShift}>
                 Create Shift
             </button>
-            <ToastContainer position="bottom-right"
-            />
+            <ToastContainer position="bottom-right" />
         </form>
     );
 }
