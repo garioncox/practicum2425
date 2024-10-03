@@ -1,4 +1,4 @@
-﻿namespace practicum2425.Server.DTOs;
+﻿namespace practicum2425.Server.Data.DTOs;
 
 public class EmployeeShiftDTO
 {

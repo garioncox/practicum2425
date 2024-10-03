@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using practicum2425.Server.Data;
-using practicum2425.Server.Interfaces;
+using practicum2425.Server.Data.Interfaces;
 using practicum2425.Server.Services;
 
 namespace practicum2425.Server.Controllers;
