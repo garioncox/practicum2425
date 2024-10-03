@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { ShiftDTO } from "../Data/DTOInterfaces/ShiftDTO";
 import { httpRequest } from "../Functions/HttpRequest";
-// import { Bounce, ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function CreateShift() {
     const [startTime, setStartTime] = useState<string>("");
@@ -17,9 +18,6 @@ function CreateShift() {
         description?: string;
         requestedEmployees?: string;
     }>({});
-    const [successMessage, setSuccessMessage] = useState<string>("");
-
-    // const triggerToast = () => toast("Shift Created Successfully!");
 
     const validateAllInput = () => {
         const errors: { [key: string]: string } = {};
@@ -56,11 +54,23 @@ function CreateShift() {
                 RequestedEmployees: requestedEmployees,
                 Status: "ACTIVE",
             };
-            await httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/create', shift, "POST");
-            setSuccessMessage("Shift Added Successfully");
+            toast.promise(
+                httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/create', shift, "POST"),
+                {
+                    pending: 'Creating Shift...',
+                    success: {
+                        render() {
+                            return 'Shift Created Successfully';
+                        },
+                    },
+                    error: {
+                        render({ data }) {
+                            return data.message || 'Error Creating Shift';
+                        },
+                    },
+                }
+            );
             setFormErrors({});
-            // for(let i = 0; i < 50; i++)
-            // {triggerToast();triggerToast2();triggerToast3();}
         }
     }
 
@@ -139,8 +149,8 @@ function CreateShift() {
             <button className="btn btn-primary" type="button" onClick={postShift}>
                 Create Shift
             </button>
-            {/* <ToastContainer /> */}
-            {successMessage && <div className="alert alert-success mt-3">{successMessage}</div>}
+            <ToastContainer position="bottom-right"
+            />
         </form>
     );
 }
