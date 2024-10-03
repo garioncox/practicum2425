@@ -1,6 +1,6 @@
 ﻿using practicum2425.Server.Data;
 
-namespace practicum2425.Server.Interfaces;
+namespace practicum2425.Server.Data.Interfaces;
 
 public interface IEmployeeService
 {

@@ -13,5 +13,9 @@ public partial class Employee
 
     public string? Phonenumber { get; set; }
 
+    public int? Roleid { get; set; }
+
     public virtual ICollection<EmployeeShift> EmployeeShifts { get; set; } = new List<EmployeeShift>();
+
+    public virtual Role? Role { get; set; }
 }

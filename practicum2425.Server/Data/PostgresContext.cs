@@ -27,6 +27,8 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<ProjectShift> ProjectShifts { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
     public virtual DbSet<Shift> Shifts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -85,6 +87,12 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.Phonenumber)
                 .HasMaxLength(13)
                 .HasColumnName("phonenumber");
+            entity.Property(e => e.Roleid).HasColumnName("roleid");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Employees)
+                .HasForeignKey(d => d.Roleid)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("rolename");
         });
 
         modelBuilder.Entity<EmployeeShift>(entity =>
@@ -160,6 +168,18 @@ public partial class PostgresContext : DbContext
                 .HasForeignKey(d => d.ShiftId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("project_shift_shift_id_fkey");
+        });
+
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("role_pkey");
+
+            entity.ToTable("role", "practicum2425");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Rolename)
+                .HasMaxLength(15)
+                .HasColumnName("rolename");
         });
 
         modelBuilder.Entity<Shift>(entity =>

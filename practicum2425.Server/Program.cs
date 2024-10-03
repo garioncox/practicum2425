@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using practicum2425.Server.Controllers;
 using practicum2425.Server.Data;
-using practicum2425.Server.Interfaces;
+using practicum2425.Server.Data.Interfaces;
 using practicum2425.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);

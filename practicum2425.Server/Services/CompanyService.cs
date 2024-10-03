@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using practicum2425.Server.Data;
-using practicum2425.Server.Interfaces;
+using practicum2425.Server.Data.Interfaces;
 
 namespace practicum2425.Server.Services;
 
