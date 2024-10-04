@@ -485,3 +485,5 @@ $RECYCLE.BIN/
 *.swp
 
 practicum2425.client/package-lock.json
+
+.vscode/
