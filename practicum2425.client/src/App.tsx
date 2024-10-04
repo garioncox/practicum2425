@@ -6,7 +6,7 @@ import ShiftList from "./Pages/ShiftList";
 import ShiftOfficerList from "./Pages/ShiftOfficerList";
 import CreateProject from "./Pages/CreateProject";
 import EmployeeDetails from "./Pages/EmployeeDetails";
-import ViewEmployees from "./Pages/ViewEmployees";
+import EmployeeList from "./Pages/EmployeeList";
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
             <Route path="project/view" element={<ProjectList />} />
             <Route path="shift/create" element={<CreateShift />} />
             <Route path="project/create" element={<CreateProject />} />
-            <Route path="admin/view/employees" element={<ViewEmployees />} />
+            <Route path="admin/view/employees" element={<EmployeeList />} />
             <Route path="admin/view/employees/:id" element={<EmployeeDetails />} />
         </Routes>
     );
