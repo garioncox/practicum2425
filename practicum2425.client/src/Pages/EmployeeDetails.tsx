@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Employee } from "../DataInterface/EmployeeInterface"
 import { useParams } from 'react-router-dom'
-import { Shift } from '../DataInterface/ShiftInterface'
+import { Employee } from '../Data/Interfaces/EmployeeInterface'
+import { Shift } from '../Data/Interfaces/Shift'
 
 function EmployeeDetails() {
     const { id } = useParams()
