@@ -49,7 +49,7 @@ function ShiftOfficerList() {
             ShiftId: id
         }
 
-        httpRequest(import.meta.env.VITE_API_URL + 'api/EmployeeShift/', employee, "POST")
+        httpRequest(import.meta.env.VITE_API_URL + 'api/EmployeeShift/add', employee, "POST")
 
     }
 

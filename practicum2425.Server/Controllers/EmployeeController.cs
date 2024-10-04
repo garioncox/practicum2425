@@ -15,19 +15,19 @@ public class EmployeeController : Controller
         _EmployeeService = service;
     }
 
-    [HttpGet("GetEmployees")]
+    [HttpGet("get")]
     public async Task<List<Employee>> GetEmployeeListAsync()
     {
         return await _EmployeeService.GetEmployeesListAsync();
     }
 
-    [HttpGet("GetEmployees/{id}")]
+    [HttpGet("get/{id}")]
     public async Task<Employee> GetEmployeeById( int id)
     {
         return await _EmployeeService.GetEmployeeByIdAsync(id);
     }
 
-    [HttpPost("PostEmployee/")]
+    [HttpPost("add")]
     public async Task PostEmployee([FromBody] EmployeeDTO employeeDTO)
     {
         Employee employee = new Employee()

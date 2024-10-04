@@ -70,7 +70,7 @@ function CreateShift() {
                 Status: "ACTIVE",
             };
             toast.promise(
-                httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/create', shift, "POST"),
+                httpRequest(import.meta.env.VITE_API_URL + 'api/Shift/add', shift, "POST"),
                 {
                     pending: 'Creating Shift...',
                     success: {
