@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Shift } from '../Data/Interfaces/Shift'
-import { httpDelete, httpRequest } from '../Functions/HttpRequest';
+import { httpRequest } from '../Functions/HttpRequest';
 
 function ShiftList() {
     const [selected, setSelected] = useState<number>()
@@ -74,10 +74,6 @@ function ShiftList() {
 
         setShifts(prevShifts =>
             prevShifts?.map(s => (s.id === newShift.id ? newShift : s)))
-    }
-
-    function handleDelete(id: number): void {
-        httpDelete(import.meta.env.VITE_API_URL + 'api/Shift/delete/' + String(id))
     }
     
     function findShift() {

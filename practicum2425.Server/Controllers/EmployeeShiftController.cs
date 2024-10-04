@@ -12,7 +12,7 @@ public class EmployeeShiftController(IEmployeeShiftService service, IShiftServic
     private readonly IEmployeeShiftService _empShiftService = service;
     private readonly IShiftService _shiftService = shiftService;
 
-    [HttpPost()]
+    [HttpPost("add")]
     public async Task CreateEmpShift([FromBody] EmployeeShiftDTO empShift)
     {
         var signedUpFor = GetShiftsByEmpId(empShift.EmployeeId);
@@ -47,10 +47,10 @@ public class EmployeeShiftController(IEmployeeShiftService service, IShiftServic
         await _empShiftService.CreateEmployeeShift(e);
     }
 
-    [HttpDelete()]
-    public async Task DeleteEmpShift(int empShiftId)
+    [HttpDelete("delete/{Id}")]
+    public async Task DeleteEmpShift(int Id)
     {
-        await _empShiftService.DeleteEmpShiftAsync(empShiftId);
+        await _empShiftService.DeleteEmpShiftAsync(Id);
     }
 
     [HttpGet("getShifts/{empId}")]

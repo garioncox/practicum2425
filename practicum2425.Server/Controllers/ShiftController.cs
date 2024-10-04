@@ -25,7 +25,7 @@ public class ShiftController : ControllerBase
         return await _shiftService.GetAllArchivedAndCompletedShifts();
     }
 
-    [HttpPost("create")]
+    [HttpPost("add")]
     public async Task CreateShift([FromBody] ShiftDTO shiftDTO)
     {
         Shift shift = new()
